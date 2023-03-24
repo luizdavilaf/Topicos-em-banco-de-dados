@@ -5,13 +5,40 @@
 
 package apresentacao;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import negocio.Funcionario;
+import negocio.Setor;
+
+
 /**
  *
  * @author luizd
  */
 public class Main {
-
+ private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("MinhaPU");
+         
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        Funcionario joao = new Funcionario();
+        joao.setEmail("joao@net.com");
+        joao.setNome("Joao Brasil");
+        joao.setSenha("1234");
+        Setor administracao = new Setor();
+        administracao.setDescricao("Administração");
+        joao.setSetor(administracao);
+        em.persist(administracao);
+        em.persist(joao);
+        em.getTransaction().commit();
+        
+        
     }
 }
