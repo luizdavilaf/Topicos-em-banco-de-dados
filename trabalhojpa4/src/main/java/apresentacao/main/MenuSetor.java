@@ -4,16 +4,20 @@
  */
 package apresentacao.main;
 
+import java.util.List;
+import negocio.Setor;
+import persistencia.SetorDAO;
+
 /**
  *
  * @author luizd
  */
-public class MenuPrincipal extends javax.swing.JFrame {
+public class MenuSetor extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuPrincipal
+     * Creates new form MenuSetor
      */
-    public MenuPrincipal() {
+    public MenuSetor() {
         initComponents();
     }
 
@@ -27,53 +31,52 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        botaoSetor = new javax.swing.JButton();
-        botaoFuncionario = new javax.swing.JButton();
-        botaoPaciente = new javax.swing.JButton();
-        botaoAtendimento = new javax.swing.JButton();
+        botaoAddSetor = new javax.swing.JButton();
+        botaoGetSetor = new javax.swing.JButton();
+        botaoEditSetor = new javax.swing.JButton();
+        botaoDeleteSetor = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("menu_principal");
 
-        botaoSetor.setBackground(new java.awt.Color(51, 153, 255));
-        botaoSetor.setForeground(new java.awt.Color(255, 255, 255));
-        botaoSetor.setText("CRUD Setor");
-        botaoSetor.setActionCommand("CRUD_Setor");
-        botaoSetor.addActionListener(new java.awt.event.ActionListener() {
+        botaoAddSetor.setBackground(new java.awt.Color(51, 153, 255));
+        botaoAddSetor.setForeground(new java.awt.Color(255, 255, 255));
+        botaoAddSetor.setText("Adicionar Setor");
+        botaoAddSetor.setActionCommand("CRUD_Setor");
+        botaoAddSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoSetorActionPerformed(evt);
+                botaoAddSetorActionPerformed(evt);
             }
         });
 
-        botaoFuncionario.setBackground(new java.awt.Color(51, 153, 255));
-        botaoFuncionario.setForeground(new java.awt.Color(255, 255, 255));
-        botaoFuncionario.setText("CRUD Funcionário");
-        botaoFuncionario.setActionCommand("CRUD_Funcionário");
-        botaoFuncionario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        botaoFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        botaoGetSetor.setBackground(new java.awt.Color(51, 153, 255));
+        botaoGetSetor.setForeground(new java.awt.Color(255, 255, 255));
+        botaoGetSetor.setText("Ver Setores");
+        botaoGetSetor.setActionCommand("CRUD_Funcionário");
+        botaoGetSetor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botaoGetSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoFuncionarioActionPerformed(evt);
+                botaoGetSetorActionPerformed(evt);
             }
         });
 
-        botaoPaciente.setBackground(new java.awt.Color(51, 153, 255));
-        botaoPaciente.setForeground(new java.awt.Color(255, 255, 255));
-        botaoPaciente.setText("CRUD Paciente");
-        botaoPaciente.setActionCommand("CRUD_Paciente");
-        botaoPaciente.addActionListener(new java.awt.event.ActionListener() {
+        botaoEditSetor.setBackground(new java.awt.Color(51, 153, 255));
+        botaoEditSetor.setForeground(new java.awt.Color(255, 255, 255));
+        botaoEditSetor.setText("Editar Setores");
+        botaoEditSetor.setActionCommand("CRUD_Paciente");
+        botaoEditSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoPacienteActionPerformed(evt);
+                botaoEditSetorActionPerformed(evt);
             }
         });
 
-        botaoAtendimento.setBackground(new java.awt.Color(51, 153, 255));
-        botaoAtendimento.setForeground(new java.awt.Color(255, 255, 255));
-        botaoAtendimento.setText("CRUD Atendimento");
-        botaoAtendimento.addActionListener(new java.awt.event.ActionListener() {
+        botaoDeleteSetor.setBackground(new java.awt.Color(51, 153, 255));
+        botaoDeleteSetor.setForeground(new java.awt.Color(255, 255, 255));
+        botaoDeleteSetor.setText("Excluir Setores");
+        botaoDeleteSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAtendimentoActionPerformed(evt);
+                botaoDeleteSetorActionPerformed(evt);
             }
         });
 
@@ -81,23 +84,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Menu Principal");
+        jLabel1.setText("Menu Setor");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(195, 195, 195)
+                .addGap(212, 212, 212)
                 .addComponent(jLabel1)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -107,11 +110,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(208, 208, 208)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botaoAtendimento)
-                    .addComponent(botaoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(botaoEditSetor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoGetSetor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoAddSetor, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                    .addComponent(botaoDeleteSetor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -119,53 +122,54 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(botaoSetor)
+                .addComponent(botaoAddSetor)
                 .addGap(18, 18, 18)
-                .addComponent(botaoFuncionario)
+                .addComponent(botaoGetSetor)
                 .addGap(18, 18, 18)
-                .addComponent(botaoPaciente)
+                .addComponent(botaoEditSetor)
                 .addGap(18, 18, 18)
-                .addComponent(botaoAtendimento)
+                .addComponent(botaoDeleteSetor)
                 .addGap(52, 52, 52))
         );
+
+        botaoAddSetor.getAccessibleContext().setAccessibleName("Adicionar Setor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFuncionarioActionPerformed
+    private void botaoAddSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddSetorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoFuncionarioActionPerformed
+        new FormAddSetor().setVisible(true);
+        MenuSetor.this.setVisible(false);
+    }//GEN-LAST:event_botaoAddSetorActionPerformed
 
-    private void botaoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSetorActionPerformed
+    private void botaoGetSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGetSetorActionPerformed
         // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuSetor().setVisible(true);   
-                MenuPrincipal.this.setVisible(false);
-            }
-        });
-    }//GEN-LAST:event_botaoSetorActionPerformed
+        new MostraSetor().setVisible(false);
+        MenuSetor.this.setVisible(false);
+        
+    }//GEN-LAST:event_botaoGetSetorActionPerformed
 
-    private void botaoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPacienteActionPerformed
+    private void botaoEditSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditSetorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoPacienteActionPerformed
+    }//GEN-LAST:event_botaoEditSetorActionPerformed
 
-    private void botaoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtendimentoActionPerformed
+    private void botaoDeleteSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDeleteSetorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoAtendimentoActionPerformed
+    }//GEN-LAST:event_botaoDeleteSetorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,29 +188,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuSetor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuSetor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuSetor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuSetor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPrincipal().setVisible(true);
+                new MenuSetor().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoAtendimento;
-    private javax.swing.JButton botaoFuncionario;
-    private javax.swing.JButton botaoPaciente;
-    private javax.swing.JButton botaoSetor;
+    private javax.swing.JButton botaoAddSetor;
+    private javax.swing.JButton botaoDeleteSetor;
+    private javax.swing.JButton botaoEditSetor;
+    private javax.swing.JButton botaoGetSetor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
