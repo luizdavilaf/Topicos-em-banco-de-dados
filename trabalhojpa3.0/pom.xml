@@ -4,7 +4,7 @@
     <groupId>apresentacao</groupId>
     <artifactId>trabalhojpa3.0</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
@@ -75,6 +75,11 @@
             <version>13</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -84,16 +89,25 @@
         </dependency>
     </dependencies>
     <build>
-   <plugins>
-      <plugin>
-         <groupId>org.codehaus.mojo</groupId>
-         <artifactId>exec-maven-plugin</artifactId>
-         <version>1.4</version>
-         <configuration>
-            <mainClass>apresentacao.Main</mainClass>
-         </configuration>
-      </plugin>
-   </plugins>
-</build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <mainClass>apresentacao.Main</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>execute-after-compile</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
   
 </project>

@@ -3,20 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package negocio;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,22 +19,22 @@ import javax.persistence.Table;
  * @author luizd
  */
 @Entity
-@Table(name = "setor")
-public class Setor {
+@Table(name = "paciente")
 
-     private static final long serialVersionUID = 1L;
-    
+public class Paciente implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
-    @Column
-    private String descricao;
-    @OneToMany(mappedBy = "setor")
+    @Column(unique = true)
+    private String cpf;
+    @ManyToMany(mappedBy = "pacientes")
     private ArrayList<Funcionario> funcionarios;
-    
-    
-    public Setor() {
+
+    public Paciente() {
         this.funcionarios = new ArrayList<>();
     }
 
@@ -51,12 +46,12 @@ public class Setor {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public ArrayList<Funcionario> getFuncionarios() {
@@ -66,7 +61,7 @@ public class Setor {
     public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
     }
-    
+
     
     
 }

@@ -3,20 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package negocio;
-import java.io.Serializable;
+
 import java.util.ArrayList;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 /**
@@ -27,8 +24,8 @@ import javax.persistence.Table;
 @Table(name = "setor")
 public class Setor {
 
-     private static final long serialVersionUID = 1L;
-    
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -37,8 +34,7 @@ public class Setor {
     private String descricao;
     @OneToMany(mappedBy = "setor")
     private ArrayList<Funcionario> funcionarios;
-    
-    
+
     public Setor() {
         this.funcionarios = new ArrayList<>();
     }
@@ -66,7 +62,5 @@ public class Setor {
     public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
     }
-    
-    
-    
+
 }
