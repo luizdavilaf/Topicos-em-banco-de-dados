@@ -6,6 +6,7 @@ package negocio;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class Paciente implements Serializable {
     @Column(unique = true)
     private String cpf;
     @ManyToMany(mappedBy = "pacientes")
-    private ArrayList<Funcionario> funcionarios;
+    private List<Funcionario> funcionarios;
 
     public Paciente() {
         this.funcionarios = new ArrayList<>();
@@ -54,7 +55,7 @@ public class Paciente implements Serializable {
         this.cpf = cpf;
     }
 
-    public ArrayList<Funcionario> getFuncionarios() {
+    public List<Funcionario> getFuncionarios() {
         return funcionarios;
     }
 

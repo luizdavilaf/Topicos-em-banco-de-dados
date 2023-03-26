@@ -5,6 +5,7 @@
 package negocio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class Setor {
     @Column
     private String descricao;
     @OneToMany(mappedBy = "setor")
-    private ArrayList<Funcionario> funcionarios;
+    private List<Funcionario> funcionarios;
 
     public Setor() {
         this.funcionarios = new ArrayList<>();
@@ -55,7 +56,7 @@ public class Setor {
         this.descricao = descricao;
     }
 
-    public ArrayList<Funcionario> getFuncionarios() {
+    public List<Funcionario> getFuncionarios() {
         return funcionarios;
     }
 

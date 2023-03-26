@@ -33,12 +33,11 @@ public class MenuSetor extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         botaoAddSetor = new javax.swing.JButton();
         botaoGetSetor = new javax.swing.JButton();
-        botaoEditSetor = new javax.swing.JButton();
-        botaoDeleteSetor = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(1024, 768));
 
         botaoAddSetor.setBackground(new java.awt.Color(51, 153, 255));
         botaoAddSetor.setForeground(new java.awt.Color(255, 255, 255));
@@ -61,25 +60,6 @@ public class MenuSetor extends javax.swing.JFrame {
             }
         });
 
-        botaoEditSetor.setBackground(new java.awt.Color(51, 153, 255));
-        botaoEditSetor.setForeground(new java.awt.Color(255, 255, 255));
-        botaoEditSetor.setText("Editar Setores");
-        botaoEditSetor.setActionCommand("CRUD_Paciente");
-        botaoEditSetor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoEditSetorActionPerformed(evt);
-            }
-        });
-
-        botaoDeleteSetor.setBackground(new java.awt.Color(51, 153, 255));
-        botaoDeleteSetor.setForeground(new java.awt.Color(255, 255, 255));
-        botaoDeleteSetor.setText("Excluir Setores");
-        botaoDeleteSetor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoDeleteSetorActionPerformed(evt);
-            }
-        });
-
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -91,9 +71,9 @@ public class MenuSetor extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(212, 212, 212)
+                .addGap(326, 326, 326)
                 .addComponent(jLabel1)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addContainerGap(346, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,30 +89,22 @@ public class MenuSetor extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(botaoEditSetor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(263, 263, 263)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(botaoGetSetor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botaoAddSetor, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                    .addComponent(botaoDeleteSetor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botaoAddSetor, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(botaoAddSetor)
-                .addGap(18, 18, 18)
-                .addComponent(botaoGetSetor)
-                .addGap(18, 18, 18)
-                .addComponent(botaoEditSetor)
-                .addGap(18, 18, 18)
-                .addComponent(botaoDeleteSetor)
-                .addGap(52, 52, 52))
+                .addGap(108, 108, 108)
+                .addComponent(botaoAddSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(botaoGetSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(371, Short.MAX_VALUE))
         );
-
-        botaoAddSetor.getAccessibleContext().setAccessibleName("Adicionar Setor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,24 +124,18 @@ public class MenuSetor extends javax.swing.JFrame {
 
     private void botaoAddSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddSetorActionPerformed
         // TODO add your handling code here:
-        new FormAddSetor().setVisible(true);
+        Setor setor = new Setor();
+        new FormAddSetor("add", setor).setVisible(true);
         MenuSetor.this.setVisible(false);
     }//GEN-LAST:event_botaoAddSetorActionPerformed
 
     private void botaoGetSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGetSetorActionPerformed
         // TODO add your handling code here:
-        new MostraSetor().setVisible(false);
         MenuSetor.this.setVisible(false);
+        new MostraSetor2().setVisible(true);
+        
         
     }//GEN-LAST:event_botaoGetSetorActionPerformed
-
-    private void botaoEditSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditSetorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoEditSetorActionPerformed
-
-    private void botaoDeleteSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDeleteSetorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoDeleteSetorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,8 +174,6 @@ public class MenuSetor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAddSetor;
-    private javax.swing.JButton botaoDeleteSetor;
-    private javax.swing.JButton botaoEditSetor;
     private javax.swing.JButton botaoGetSetor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

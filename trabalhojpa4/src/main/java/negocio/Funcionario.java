@@ -6,6 +6,7 @@ package negocio;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,7 +46,7 @@ public class Funcionario implements Serializable {
     private String funcao;
     @ManyToMany
     @JoinTable(name = "funcioario_paciente")
-    private ArrayList<Paciente> pacientes;    
+    private List<Paciente> pacientes;    
     @ManyToOne
     @JoinColumn(name = "setor_id", referencedColumnName = "id")
     private Setor setor;
@@ -88,7 +89,7 @@ public class Funcionario implements Serializable {
         this.senha = senha;
     }
 
-    public ArrayList<Paciente> getPacientes() {
+    public List<Paciente> getPacientes() {
         return pacientes;
     }
 

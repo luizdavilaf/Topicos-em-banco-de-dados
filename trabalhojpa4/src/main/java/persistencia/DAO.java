@@ -14,11 +14,12 @@ import javax.persistence.Persistence;
 public abstract class DAO {
     
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("MinhaPU");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManager entityManager ;
     
 
     
     public EntityManager getEntityManager() {
+        entityManager = entityManagerFactory.createEntityManager();
         return entityManager;
     }
 
