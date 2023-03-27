@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,11 +33,12 @@ public class Paciente implements Serializable {
     private int id;
     @Column(unique = true)
     private String cpf;
-    @ManyToMany(mappedBy = "pacientes")
-    private List<Funcionario> funcionarios;
+    //um paciente tem varios atendimentos - um atencimento tem apenas um paciente
+    @OneToMany
+    private List<Atendimento> atendimentos;
 
     public Paciente() {
-        this.funcionarios = new ArrayList<>();
+        this.atendimentos = new ArrayList<>();
     }
 
     public int getId() {
@@ -55,12 +57,12 @@ public class Paciente implements Serializable {
         this.cpf = cpf;
     }
 
-    public List<Funcionario> getFuncionarios() {
-        return funcionarios;
+    public List<Atendimento> getAtendimentos() {
+        return atendimentos;
     }
 
-    public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
+    public void setAtendimentos(ArrayList<Atendimento> atendimentos) {
+        this.atendimentos = atendimentos;
     }
 
     

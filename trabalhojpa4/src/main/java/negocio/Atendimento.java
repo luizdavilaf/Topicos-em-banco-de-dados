@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,9 +34,12 @@ public class Atendimento implements Serializable {
     private String data;
     @Column
     private String observacoes;
-    @OneToOne
+    //um atendimento tem apenas um funcionario -- texto confuso na descrição do trab
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
     

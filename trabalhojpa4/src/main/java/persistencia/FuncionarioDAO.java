@@ -10,7 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import negocio.Setor;
+import negocio.Funcionario;
+//import negocio.Funcionario;
 
 /**
  *
@@ -18,54 +19,89 @@ import negocio.Setor;
  */
 public class FuncionarioDAO extends DAO {
 
-    public void create(String descricao) {
-        entityManager.getTransaction().begin();
-        Setor setor = new Setor();
-        setor.setDescricao(descricao);
-        entityManager.persist(setor);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    public List<Setor> listAll() {
-        entityManager.getTransaction().begin();
-        List<Setor> vetSetor = entityManager.createNativeQuery("SELECT * FROM setor", Setor.class).getResultList();
-        return vetSetor;
-    }
-
-    public Setor findById(int id) {
+    public void create(Funcionario funcionario) {
+        entityManager = null;
         try {
-            entityManager.getTransaction().begin();
-            return entityManager.find(Setor.class, id);
-        } catch (EntityNotFoundException erro) {
-            throw new EntityNotFoundException("Setor não encontrado");
-        }
-
-    }
-
-    public void removeById(int id) {
-        Setor setor;
-        try {
-            entityManager.getTransaction().begin();
-            setor = entityManager.getReference(Setor.class, id);
-            setor.getId();
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();            
+            entityManager.persist(funcionario);
+            entityManager.getTransaction().commit();            
         } catch (Exception e) {
-            throw new IllegalCallerException("Setor com o id nao existe");
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
         }
-        entityManager.remove(setor);
-        entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
-    public void update(Setor setor) {
+    public List<Funcionario> listaFuncionarios() {
+        entityManager = null;
         try {
+            entityManager = getEntityManager();
             entityManager.getTransaction().begin();
-            setor = entityManager.merge(setor);
+            List<Funcionario> vetFuncionario = entityManager.createNativeQuery("SELECT * FROM funcionario", Funcionario.class).getResultList();
+            return vetFuncionario;
+        } finally {
+            entityManager.close();
+
+        }
+
+    }
+
+    public Funcionario findById(int id) {
+        entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            Funcionario funcionario = entityManager.find(Funcionario.class, id);
+            return funcionario;
+        } catch (EntityNotFoundException erro) {
+            throw new EntityNotFoundException("Funcionario não encontrado");
+        } finally {
+            entityManager.close();
+
+        }
+
+    }
+
+    public void remove(Funcionario funcionario) {
+        entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            Funcionario funcionario2;
+            try {
+                funcionario2 = entityManager.getReference(Funcionario.class, funcionario.getId());
+                funcionario2.getId();
+            } catch (Exception e) {
+                throw new IllegalCallerException("erro ao encontrar funcionario");
+            }
+            entityManager.remove(funcionario2);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            throw new IllegalCallerException("Setor com o id nao existe");
+            throw new IllegalCallerException("erro ao apagar funcionario");
+        } finally {
+            entityManager.close();
         }
-        entityManager.close();
+
+    }
+
+    public Funcionario update(Funcionario funcionario) {
+        entityManager = null;        
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            funcionario = entityManager.merge(funcionario);
+            entityManager.getTransaction().commit();
+            return funcionario;
+
+        } catch (Exception e) {
+            throw new IllegalCallerException("Funcionario com o id nao existe");
+        } finally {
+            entityManager.close();
+
+        }
+
     }
 
 }

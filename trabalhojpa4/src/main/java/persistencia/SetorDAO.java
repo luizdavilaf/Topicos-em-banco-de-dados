@@ -27,7 +27,7 @@ public class SetorDAO extends DAO {
             setor.setDescricao(descricao);
             entityManager.persist(setor);
             entityManager.getTransaction().commit();
-            entityManager.close();
+            
         } catch (Exception e) {
         } finally {
             if (entityManager != null) {
@@ -38,12 +38,21 @@ public class SetorDAO extends DAO {
 
     public List<Setor> listaSetores() {
         entityManager = null;
+        List<Setor> vetSetor = null;
         try {
             entityManager = getEntityManager();
             entityManager.getTransaction().begin();
-            List<Setor> vetSetor = entityManager.createNativeQuery("SELECT * FROM setor", Setor.class).getResultList();
-            return vetSetor;
-        } finally {
+            try {
+               vetSetor = entityManager.createNativeQuery("SELECT * FROM setor", Setor.class).getResultList();
+            } finally {
+                return vetSetor;
+            }
+            
+            
+        }catch(Exception e){
+            throw new IllegalCallerException("erro ao encontrar setores");
+        } 
+        finally {
             entityManager.close();
 
         }
@@ -71,10 +80,17 @@ public class SetorDAO extends DAO {
         try {
             entityManager = getEntityManager();
             entityManager.getTransaction().begin();
-            entityManager.remove(setor);
+            Setor setor2;
+            try {
+                setor2 = entityManager.getReference(Setor.class, setor.getId());
+                setor2.getId();
+            } catch (Exception e) {
+                throw new IllegalCallerException("erro ao encontrar setor");
+            }
+            entityManager.remove(setor2);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            throw new IllegalCallerException("Setor com o id nao existe");
+            throw new IllegalCallerException("erro ao apagar setor");
         } finally {
             entityManager.close();
         }
@@ -82,8 +98,7 @@ public class SetorDAO extends DAO {
     }
 
     public Setor update(Setor setor) {
-        entityManager = null;
-        System.out.println("ta antes do try");
+        entityManager = null;        
         try {
             entityManager = getEntityManager();
             entityManager.getTransaction().begin();

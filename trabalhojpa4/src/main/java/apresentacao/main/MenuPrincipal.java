@@ -147,13 +147,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void botaoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFuncionarioActionPerformed
         // TODO add your handling code here:
+        new MenuFuncionario().setVisible(true);
+        MenuPrincipal.this.setVisible(false);
     }//GEN-LAST:event_botaoFuncionarioActionPerformed
 
     private void botaoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSetorActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuSetor().setVisible(true);   
+                new MenuSetor().setVisible(true);
                 MenuPrincipal.this.setVisible(false);
             }
         });

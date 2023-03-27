@@ -44,15 +44,15 @@ public class Funcionario implements Serializable {
     private String senha;
     @Column
     private String funcao;
-    @ManyToMany
-    @JoinTable(name = "funcioario_paciente")
-    private List<Paciente> pacientes;    
+    //um funcionario tem varios atendimentos - um atendimento tem apenas um funcionario
+    @OneToMany
+    private List<Atendimento> atendimentos;    
     @ManyToOne
     @JoinColumn(name = "setor_id", referencedColumnName = "id")
     private Setor setor;
 
     public Funcionario() {
-        this.pacientes = new ArrayList<>();
+        this.atendimentos = new ArrayList<>();
     }
 
    
@@ -89,12 +89,12 @@ public class Funcionario implements Serializable {
         this.senha = senha;
     }
 
-    public List<Paciente> getPacientes() {
-        return pacientes;
+    public List<Atendimento> getAtendimentos() {
+        return atendimentos;
     }
 
-    public void setPacientes(ArrayList<Paciente> pacientes) {
-        this.pacientes = pacientes;
+    public void setAtendimentos(ArrayList<Atendimento> pacientes) {
+        this.atendimentos = pacientes;
     }
 
     public Setor getSetor() {

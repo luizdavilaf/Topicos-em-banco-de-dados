@@ -62,9 +62,9 @@ public class MostraSetor2 extends javax.swing.JFrame {
                             MostraSetor2.this.setVisible(false);
                             new FormAddSetor("edit", setor).setVisible(true);
                         } catch (Exception e) {
-                             System.out.println("Erro edit");
+                            System.out.println("Erro edit");
                         }
-                       
+
                     } catch (Exception e) {
                         System.out.println("Erro edit");
                     }
@@ -90,12 +90,12 @@ public class MostraSetor2 extends javax.swing.JFrame {
             }
         });
         this.add(botaoMenuPrincipal);
-        
+
         botaoDeletar = new JButton();
         botaoDeletar.setBounds(200, 300, 100, 30);
         botaoDeletar.setHorizontalAlignment(2);
 
-        botaoDeletar.setText("Deltar");
+        botaoDeletar.setText("Deletar");
         botaoDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEditarActionPerformed(evt);
@@ -106,17 +106,21 @@ public class MostraSetor2 extends javax.swing.JFrame {
                 if (listaSetores.getSelectedIndex() != -1) {
                     try {
 
-                        Setor setor = listaSetoresObj.get(listaSetores.getSelectedIndex());
-
-                        try {
-                            MostraSetor2.this.setVisible(false);
-                            new FormAddSetor("edit", setor).setVisible(true);
-                        } catch (Exception e) {
-                             System.out.println("Erro edit");
-                        }
+                        Setor setor2 = listaSetoresObj.get(listaSetores.getSelectedIndex());
+                        SetorDAO setorDAO2 = new SetorDAO();
                        
+                        try {
+                            setorDAO2.remove(setor2);
+                            
+                        } catch (Exception e) {
+                            System.out.println("Erro banco delete");
+                        } finally{
+                            MostraSetor2.this.setVisible(false);
+                            new MenuPrincipal().setVisible(true);
+                        }
+
                     } catch (Exception e) {
-                        System.out.println("Erro edit");
+                        System.out.println("Erro delete pegar index");
                     }
                 }
             }
@@ -125,7 +129,5 @@ public class MostraSetor2 extends javax.swing.JFrame {
 
         this.setVisible(true);
     }
-
-   
 
 }
