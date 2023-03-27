@@ -7,6 +7,7 @@ package negocio;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,12 +34,22 @@ public class Paciente implements Serializable {
     private int id;
     @Column(unique = true)
     private String cpf;
+    @Column
+    private String nome;
     //um paciente tem varios atendimentos - um atencimento tem apenas um paciente
-    @OneToMany
+    @OneToMany (mappedBy = "paciente", cascade = CascadeType.ALL)
     private List<Atendimento> atendimentos;
 
     public Paciente() {
         this.atendimentos = new ArrayList<>();
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public int getId() {

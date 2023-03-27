@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import negocio.Atendimento;
 import negocio.Setor;
 
 /**
@@ -18,51 +19,87 @@ import negocio.Setor;
  */
 public class AtendimentoDAO extends DAO {
 
-    public void cadastraSetor(String descricao) {
-        entityManager.getTransaction().begin();
-        Setor setor = new Setor();
-        setor.setDescricao(descricao);
-        entityManager.persist(setor);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    public List<Setor> listaSetores() {
-        entityManager.getTransaction().begin();
-        List<Setor> vetSetor = entityManager.createNativeQuery("SELECT * FROM setor", Setor.class).getResultList();
-        return vetSetor;
-    }
-
-    public Setor findById(int id) {
+   public void create(Atendimento atendimento) {
+        entityManager = null;
         try {
-            entityManager.getTransaction().begin();
-            return entityManager.find(Setor.class, id);
-        } catch (EntityNotFoundException erro) {
-            throw new EntityNotFoundException("Setor não encontrado");
-        }
-        
-    }
-
-    public void removeById(int id) {
-        Setor setor;
-        try {
-            entityManager.getTransaction().begin();
-            setor = entityManager.getReference(Setor.class, id);
-            setor.getId();
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();            
+            entityManager.persist(atendimento);
+            entityManager.getTransaction().commit();            
         } catch (Exception e) {
-            throw new IllegalCallerException("Setor com o id nao existe");
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
         }
-        entityManager.remove(setor);
-        entityManager.getTransaction().commit();
     }
 
-    public void update(Setor setor) {
+    public List<Atendimento> listaAtendimentos() {
+        entityManager = null;
         try {
+            entityManager = getEntityManager();
             entityManager.getTransaction().begin();
-            setor = entityManager.merge(setor);
+            List<Atendimento> vetAtendimento = entityManager.createNativeQuery("SELECT * FROM atendimento", Atendimento.class).getResultList();
+            return vetAtendimento;
+        } finally {
+            entityManager.close();
+
+        }
+
+    }
+
+    public Atendimento findById(int id) {
+        entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            Atendimento atendimento = entityManager.find(Atendimento.class, id);
+            return atendimento;
+        } catch (EntityNotFoundException erro) {
+            throw new EntityNotFoundException("Atendimento não encontrado");
+        } finally {
+            entityManager.close();
+
+        }
+
+    }
+
+    public void remove(Atendimento atendimento) {
+        entityManager = null;
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            Atendimento atendimento2;
+            try {
+                atendimento2 = entityManager.getReference(Atendimento.class, atendimento.getId());
+                atendimento2.getId();
+            } catch (Exception e) {
+                throw new IllegalCallerException("erro ao encontrar atendimento");
+            }
+            entityManager.remove(atendimento2);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            throw new IllegalCallerException("Setor com o id nao existe");
+            throw new IllegalCallerException("erro ao apagar atendimento");
+        } finally {
+            entityManager.close();
+        }
+
+    }
+
+    public Atendimento update(Atendimento atendimento) {
+        entityManager = null;        
+        try {
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            atendimento = entityManager.merge(atendimento);
+            entityManager.getTransaction().commit();
+            return atendimento;
+
+        } catch (Exception e) {
+            throw new IllegalCallerException("Atendimento com o id nao existe");
+        } finally {
+            entityManager.close();
+
         }
 
     }

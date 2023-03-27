@@ -162,7 +162,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSetorActionPerformed
 
     private void botaoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPacienteActionPerformed
-        // TODO add your handling code here:
+        new MenuPaciente().setVisible(true);
+        MenuPrincipal.this.setVisible(false);
     }//GEN-LAST:event_botaoPacienteActionPerformed
 
     private void botaoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtendimentoActionPerformed

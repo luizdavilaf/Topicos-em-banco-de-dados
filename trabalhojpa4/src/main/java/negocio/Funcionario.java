@@ -45,7 +45,7 @@ public class Funcionario implements Serializable {
     @Column
     private String funcao;
     //um funcionario tem varios atendimentos - um atendimento tem apenas um funcionario
-    @OneToMany
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
     private List<Atendimento> atendimentos;    
     @ManyToOne
     @JoinColumn(name = "setor_id", referencedColumnName = "id")
@@ -93,8 +93,8 @@ public class Funcionario implements Serializable {
         return atendimentos;
     }
 
-    public void setAtendimentos(ArrayList<Atendimento> pacientes) {
-        this.atendimentos = pacientes;
+    public void setAtendimentos(ArrayList<Atendimento> atendimentos) {
+        this.atendimentos = atendimentos;
     }
 
     public Setor getSetor() {

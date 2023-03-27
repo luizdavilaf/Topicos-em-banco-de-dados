@@ -52,7 +52,7 @@ public class MenuFuncionario extends javax.swing.JFrame {
 
         botaoGetSetor.setBackground(new java.awt.Color(51, 153, 255));
         botaoGetSetor.setForeground(new java.awt.Color(255, 255, 255));
-        botaoGetSetor.setText("Ver Funcionarios");
+        botaoGetSetor.setText("Ver/Editar/Deletar Funcionarios");
         botaoGetSetor.setActionCommand("CRUD_Funcionário");
         botaoGetSetor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         botaoGetSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -124,8 +124,7 @@ public class MenuFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoAddSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddSetorActionPerformed
-        // TODO add your handling code here:
-        //Setor setor = new Setor();
+
         
         try {
             Funcionario funcionario = new Funcionario();
@@ -137,9 +136,9 @@ public class MenuFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoAddSetorActionPerformed
 
     private void botaoGetSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGetSetorActionPerformed
-        // TODO add your handling code here:
+        
         MenuFuncionario.this.setVisible(false);
-        new MostraSetor2().setVisible(true);
+        new MostraFuncionarios().setVisible(true);
         
         
     }//GEN-LAST:event_botaoGetSetorActionPerformed

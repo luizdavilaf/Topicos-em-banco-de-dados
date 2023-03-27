@@ -30,13 +30,23 @@ public class FormAddFunc2 extends javax.swing.JFrame {
     javax.swing.JButton botaoSalvar;
     List<Setor> listaSetoresObj;
     private String origem;
+    private Funcionario funcionario;
 
     public String getOrigem() {
         return origem;
     }
 
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
     public FormAddFunc2(String origem, Funcionario funcionarioOrigem) {
         this.origem = origem;
+        this.funcionario = funcionarioOrigem;
         try {
             this.setSize(1024, 768);
             this.setTitle("MostraSetor");
@@ -89,7 +99,9 @@ public class FormAddFunc2 extends javax.swing.JFrame {
                     nome.setText(funcionarioOrigem.getNome());
                     email.setText(funcionarioOrigem.getEmail());
                     senha.setText(funcionarioOrigem.getSenha());
-                    funcao.setText(funcionarioOrigem.getFuncao());
+                    funcao.setText(funcionarioOrigem.getFuncao());                    
+                }else{
+                    this.funcionario = new Funcionario();
                 }
                 painelFuncao.add(labelFuncao);
                 painelFuncao.add(funcao);
@@ -122,8 +134,8 @@ public class FormAddFunc2 extends javax.swing.JFrame {
                         if (listaSetores.getSelectedIndex() != -1) {
                             try {
                                 Setor setor = listaSetoresObj.get(listaSetores.getSelectedIndex());
-                                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-                                Funcionario funcionario = new Funcionario();
+                                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();       
+                                funcionario = FormAddFunc2.this.getFuncionario();
                                 funcionario.setSetor(setor);
                                 funcionario.setNome(nome.getText());
                                 funcionario.setSenha(senha.getText());

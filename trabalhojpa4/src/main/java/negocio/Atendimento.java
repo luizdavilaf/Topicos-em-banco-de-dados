@@ -5,6 +5,7 @@
 package negocio;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,10 +36,10 @@ public class Atendimento implements Serializable {
     @Column
     private String observacoes;
     //um atendimento tem apenas um funcionario -- texto confuso na descrição do trab
-    @ManyToOne
-    @JoinColumn(name = "funcionario_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="funcionario_id")
     private Funcionario funcionario;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
