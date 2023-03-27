@@ -148,60 +148,7 @@ public class FormAddFunc2 extends javax.swing.JFrame {
                     }
                 });
                 this.add(botaoSalvar);
-//
-//        botaoMenuPrincipal = new JButton();
-//        botaoMenuPrincipal.setBounds(300, 300, 100, 30);
-//        botaoMenuPrincipal.setHorizontalAlignment(2);
-//
-//        botaoMenuPrincipal.setText("Menu");
-//        botaoMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                botaoMenuPrincipalActionPerformed(evt);
-//            }
-//
-//            private void botaoMenuPrincipalActionPerformed(ActionEvent evt) {
-//                FormAddFunc2.this.setVisible(false);
-//                new MenuPrincipal().setVisible(true);
-//
-//            }
-//        });
-//        this.add(botaoMenuPrincipal);
-//
-//        botaoDeletar = new JButton();
-//        botaoDeletar.setBounds(200, 300, 100, 30);
-//        botaoDeletar.setHorizontalAlignment(2);
-//
-//        botaoDeletar.setText("Deletar");
-//        botaoDeletar.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                botaoSalvarActionPerformed(evt);
-//            }
-//
-//            private void botaoSalvarActionPerformed(ActionEvent evt) {
-//
-//                if (listaSetores.getSelectedIndex() != -1) {
-//                    try {
-//
-//                        Setor setor2 = listaSetoresObj.get(listaSetores.getSelectedIndex());
-//                        SetorDAO setorDAO2 = new SetorDAO();
-//                       
-//                        try {
-//                            setorDAO2.remove(setor2);
-//                            
-//                        } catch (Exception e) {
-//                            System.out.println("Erro banco delete");
-//                        } finally{
-//                            FormAddFunc2.this.setVisible(false);
-//                            new MenuPrincipal().setVisible(true);
-//                        }
-//
-//                    } catch (Exception e) {
-//                        System.out.println("Erro delete pegar index");
-//                    }
-//                }
-//            }
-//        });
-//        this.add(botaoDeletar);
+
             }
 
         } finally {
