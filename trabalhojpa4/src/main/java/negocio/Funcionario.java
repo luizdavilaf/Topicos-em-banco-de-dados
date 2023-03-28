@@ -6,6 +6,7 @@ package negocio;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,15 +44,15 @@ public class Funcionario implements Serializable {
     private String senha;
     @Column
     private String funcao;
-    @ManyToMany
-    @JoinTable(name = "funcioario_paciente")
-    private ArrayList<Paciente> pacientes;
-    @JoinColumn(name = "setor_id", referencedColumnName = "id")
+    //um funcionario tem varios atendimentos - um atendimento tem apenas um funcionario
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
+    private List<Atendimento> atendimentos;    
     @ManyToOne
+    @JoinColumn(name = "setor_id", referencedColumnName = "id")
     private Setor setor;
 
     public Funcionario() {
-        this.pacientes = new ArrayList<>();
+        this.atendimentos = new ArrayList<>();
     }
 
    
@@ -88,12 +89,12 @@ public class Funcionario implements Serializable {
         this.senha = senha;
     }
 
-    public ArrayList<Paciente> getPacientes() {
-        return pacientes;
+    public List<Atendimento> getAtendimentos() {
+        return atendimentos;
     }
 
-    public void setPacientes(ArrayList<Paciente> pacientes) {
-        this.pacientes = pacientes;
+    public void setAtendimentos(ArrayList<Atendimento> atendimentos) {
+        this.atendimentos = atendimentos;
     }
 
     public Setor getSetor() {
@@ -110,6 +111,11 @@ public class Funcionario implements Serializable {
 
     public void setFuncao(String funcao) {
         this.funcao = funcao;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", funcao=" + funcao + ", setor=" + setor + '}';
     }
     
 

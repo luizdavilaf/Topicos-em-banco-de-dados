@@ -3,20 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package negocio;
-import java.io.Serializable;
+
 import java.util.ArrayList;
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 /**
@@ -27,18 +25,17 @@ import javax.persistence.Table;
 @Table(name = "setor")
 public class Setor {
 
-     private static final long serialVersionUID = 1L;
-    
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @Column
     private String descricao;
-    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.REMOVE)
-    private ArrayList<Funcionario> funcionarios;
-    
-    
+    @OneToMany(mappedBy = "setor")
+    private List<Funcionario> funcionarios;
+
     public Setor() {
         this.funcionarios = new ArrayList<>();
     }
@@ -59,14 +56,12 @@ public class Setor {
         this.descricao = descricao;
     }
 
-    public ArrayList<Funcionario> getFuncionarios() {
+    public List<Funcionario> getFuncionarios() {
         return funcionarios;
     }
 
     public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
     }
-    
-    
-    
+
 }

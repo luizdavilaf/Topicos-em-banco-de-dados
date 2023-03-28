@@ -5,14 +5,21 @@
 package negocio;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,22 +31,26 @@ import javax.persistence.Table;
 public class Atendimento implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
-    @Column
-    private String data;
+    @Column(name = "data")
+    @Temporal(TemporalType.DATE)
+    private Date data;
     @Column
     private String observacoes;
-    @OneToOne
+    //um atendimento tem apenas um funcionario -- texto confuso na descrição do trab
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    
-    public Atendimento() {        
+    public Atendimento() {
     }
 
     public int getId() {
@@ -50,11 +61,11 @@ public class Atendimento implements Serializable {
         this.id = id;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
@@ -81,6 +92,16 @@ public class Atendimento implements Serializable {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        //System.out.println(this.data);
+        String string = "[" + "id=" + String.valueOf(this.getId())+
+                ", data="+ dateFormat.format(this.data)+
+                ", funcionario="+ this.getFuncionario().getNome()+
+                ", paciente="+ this.getPaciente().getNome()+
+                "]"; 
+        return string;
+    }
+
 }

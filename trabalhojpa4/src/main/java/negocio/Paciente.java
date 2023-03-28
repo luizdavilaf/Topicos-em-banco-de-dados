@@ -6,12 +6,15 @@ package negocio;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -31,11 +34,22 @@ public class Paciente implements Serializable {
     private int id;
     @Column(unique = true)
     private String cpf;
-    @ManyToMany(mappedBy = "pacientes")
-    private ArrayList<Funcionario> funcionarios;
+    @Column
+    private String nome;
+    //um paciente tem varios atendimentos - um atencimento tem apenas um paciente
+    @OneToMany (mappedBy = "paciente", cascade = CascadeType.ALL)
+    private List<Atendimento> atendimentos;
 
     public Paciente() {
-        this.funcionarios = new ArrayList<>();
+        this.atendimentos = new ArrayList<>();
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public int getId() {
@@ -54,12 +68,17 @@ public class Paciente implements Serializable {
         this.cpf = cpf;
     }
 
-    public ArrayList<Funcionario> getFuncionarios() {
-        return funcionarios;
+    public List<Atendimento> getAtendimentos() {
+        return atendimentos;
     }
 
-    public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
+    public void setAtendimentos(ArrayList<Atendimento> atendimentos) {
+        this.atendimentos = atendimentos;
+    }
+
+    @Override
+    public String toString() {
+        return "Paciente{" + "id=" + id + ", cpf=" + cpf + ", nome=" + nome + '}';
     }
 
     
