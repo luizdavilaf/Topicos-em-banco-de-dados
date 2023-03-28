@@ -24,6 +24,9 @@ public class FormAddSetor extends javax.swing.JFrame {
         initComponents();
         this.funcao = funcao;
         this.setor = setor;
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setLayout(null);
         this.setVisible(true);
     }
 

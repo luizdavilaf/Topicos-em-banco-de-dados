@@ -76,6 +76,11 @@ public class Paciente implements Serializable {
         this.atendimentos = atendimentos;
     }
 
+    @Override
+    public String toString() {
+        return "Paciente{" + "id=" + id + ", cpf=" + cpf + ", nome=" + nome + '}';
+    }
+
     
     
 }

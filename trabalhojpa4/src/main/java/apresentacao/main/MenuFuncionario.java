@@ -20,6 +20,9 @@ public class MenuFuncionario extends javax.swing.JFrame {
      */
     public MenuFuncionario() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setLayout(null);
     }
 
     /**

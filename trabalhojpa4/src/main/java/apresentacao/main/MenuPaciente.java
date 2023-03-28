@@ -20,6 +20,9 @@ public class MenuPaciente extends javax.swing.JFrame {
      */
     public MenuPaciente() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setLayout(null);
     }
 
     /**

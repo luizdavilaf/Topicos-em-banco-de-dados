@@ -5,19 +5,19 @@
 package apresentacao.main;
 
 import java.util.List;
-import negocio.Setor;
-import persistencia.SetorDAO;
+import negocio.Atendimento;
+import persistencia.AtendimentoDAO;
 
 /**
  *
  * @author luizd
  */
-public class MenuSetor extends javax.swing.JFrame {
+public class MenuAtendimento extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuSetor
+     * Creates new form MenuAtendimento
      */
-    public MenuSetor() {
+    public MenuAtendimento() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -44,7 +44,7 @@ public class MenuSetor extends javax.swing.JFrame {
 
         botaoAddSetor.setBackground(new java.awt.Color(51, 153, 255));
         botaoAddSetor.setForeground(new java.awt.Color(255, 255, 255));
-        botaoAddSetor.setText("Adicionar Setor");
+        botaoAddSetor.setText("Adicionar Atendimento");
         botaoAddSetor.setActionCommand("CRUD_Setor");
         botaoAddSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +54,7 @@ public class MenuSetor extends javax.swing.JFrame {
 
         botaoGetSetor.setBackground(new java.awt.Color(51, 153, 255));
         botaoGetSetor.setForeground(new java.awt.Color(255, 255, 255));
-        botaoGetSetor.setText("Ver/Editar/Deletar Setores");
+        botaoGetSetor.setText("Ver/Editar/Deletar Atendimento");
         botaoGetSetor.setActionCommand("CRUD_Funcionário");
         botaoGetSetor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         botaoGetSetor.addActionListener(new java.awt.event.ActionListener() {
@@ -67,23 +67,23 @@ public class MenuSetor extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Menu Setor");
+        jLabel1.setText("Menu Atendimento");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(326, 326, 326)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(297, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(346, Short.MAX_VALUE))
+                .addGap(291, 291, 291))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26))
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -94,8 +94,8 @@ public class MenuSetor extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(263, 263, 263)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(botaoGetSetor, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                    .addComponent(botaoAddSetor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botaoGetSetor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoAddSetor, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,16 +126,21 @@ public class MenuSetor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoAddSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddSetorActionPerformed
-        // TODO add your handling code here:
-        Setor setor = new Setor();
-        new FormAddSetor("add", setor).setVisible(true);
-        MenuSetor.this.setVisible(false);
+
+        
+        try {
+            Atendimento atendimento = new Atendimento();
+            new FormAddAtendimento("add", atendimento).setVisible(true);
+        } finally {
+            MenuAtendimento.this.setVisible(false);
+        }
+        
     }//GEN-LAST:event_botaoAddSetorActionPerformed
 
     private void botaoGetSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGetSetorActionPerformed
-        // TODO add your handling code here:
-        MenuSetor.this.setVisible(false);
-        new MostraSetor2().setVisible(true);
+        
+        MenuAtendimento.this.setVisible(false);
+        new MostraAtendimentos().setVisible(true);
         
         
     }//GEN-LAST:event_botaoGetSetorActionPerformed
@@ -157,20 +162,27 @@ public class MenuSetor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuSetor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAtendimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuSetor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAtendimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuSetor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAtendimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuSetor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAtendimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuSetor().setVisible(true);
+                new MenuAtendimento().setVisible(true);
             }
         });
     }

@@ -112,6 +112,11 @@ public class Funcionario implements Serializable {
     public void setFuncao(String funcao) {
         this.funcao = funcao;
     }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", funcao=" + funcao + ", setor=" + setor + '}';
+    }
     
 
 }
