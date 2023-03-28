@@ -81,7 +81,7 @@ public class FormAddAtendimento extends javax.swing.JFrame {
                 for (int i = 0; i < listaFuncObj.size(); i++) {
                     list.add((listaFuncObj.get(i).getNome()));
                 }
-                String[] stringArray = list.toArray(new String[0]);
+                String[] stringArray = listPacient.toArray(new String[0]);
                 listaPacientees = new javax.swing.JComboBox<>();
                 listaPacientees.setModel(new javax.swing.DefaultComboBoxModel<>(stringArray));
                 listaPacientees.setBounds(100, 100, 100, 30);
@@ -94,7 +94,7 @@ public class FormAddAtendimento extends javax.swing.JFrame {
                 this.add(painelListaPaciente);
                 
                 
-                String[] stringArrayPaciente = listPacient.toArray(new String[0]);
+                String[] stringArrayPaciente = list.toArray(new String[0]);
                 listaFuncionarios = new javax.swing.JComboBox<>();
                 listaFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<>(stringArrayPaciente));
                 listaFuncionarios.setBounds(100, 100, 100, 30);
