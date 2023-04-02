@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -42,11 +44,11 @@ public class Atendimento implements Serializable {
     @Column
     private String observacoes;
     //um atendimento tem apenas um funcionario -- texto confuso na descrição do trab
-    @ManyToOne
-    @JoinColumn(name = "funcionario_id")
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @JoinColumn(foreignKey = @ForeignKey(name = "funcionario_id"))
     private Funcionario funcionario;
-    @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @JoinColumn(foreignKey = @ForeignKey(name = "paciente_id"))
     private Paciente paciente;
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 

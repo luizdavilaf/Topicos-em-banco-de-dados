@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +46,7 @@ public class Funcionario implements Serializable {
     @Column
     private String funcao;
     //um funcionario tem varios atendimentos - um atendimento tem apenas um funcionario
-    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     private List<Atendimento> atendimentos;    
     @ManyToOne
     @JoinColumn(name = "setor_id", referencedColumnName = "id")

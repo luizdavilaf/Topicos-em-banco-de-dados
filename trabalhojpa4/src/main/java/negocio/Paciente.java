@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public class Paciente implements Serializable {
     @Column
     private String nome;
     //um paciente tem varios atendimentos - um atencimento tem apenas um paciente
-    @OneToMany (mappedBy = "paciente", cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "paciente", fetch = FetchType.LAZY,cascade = CascadeType.MERGE)    
     private List<Atendimento> atendimentos;
 
     public Paciente() {
