@@ -29,6 +29,7 @@ public class MostraFeed extends javax.swing.JFrame {
 
     javax.swing.JButton botaoPaginaAnterior;
     javax.swing.JButton botaoProximaPagina;
+    javax.swing.JButton botaoMenuPrincipal;
     private int pagina;
     private Inscricao inscricao;
 
@@ -98,7 +99,7 @@ public class MostraFeed extends javax.swing.JFrame {
             }
 
             try {
-                inscricaoOrigem.getArtigos().get(primeiroElemento-1);
+                inscricaoOrigem.getArtigos().get(primeiroElemento - 1);
                 botaoPaginaAnterior = new JButton();
                 botaoPaginaAnterior.setBounds(100, 990, 100, 30);
 
@@ -110,16 +111,16 @@ public class MostraFeed extends javax.swing.JFrame {
 
                     private void botaoPaginaAnteriorActionPerformed(ActionEvent evt) {
                         MostraFeed.this.dispose();
-                        new MostraFeed(pagina-1, inscricao).setVisible(true);
+                        new MostraFeed(pagina - 1, inscricao).setVisible(true);
                     }
                 });
                 this.add(botaoPaginaAnterior);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Sem artigo");
             }
-            
+
             try {
-                Artigo proximoArtigo = inscricaoOrigem.getArtigos().get(elemento+1);
+                inscricaoOrigem.getArtigos().get(elemento + 1);
                 botaoProximaPagina = new JButton();
                 botaoProximaPagina.setBounds(150, 990, 100, 30);
 
@@ -131,13 +132,31 @@ public class MostraFeed extends javax.swing.JFrame {
 
                     private void botaoProximaPaginaActionPerformed(ActionEvent evt) {
                         MostraFeed.this.dispose();
-                        new MostraFeed(pagina+1, inscricao).setVisible(true);
+                        new MostraFeed(pagina + 1, inscricao).setVisible(true);
                     }
                 });
                 this.add(botaoProximaPagina);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Sem artigo");
             }
+            
+            botaoMenuPrincipal = new JButton();
+            botaoMenuPrincipal.setBounds(200, 990, 100, 30);
+            
+
+            botaoMenuPrincipal.setText("Menu");
+            botaoMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoMenuPrincipalActionPerformed(evt);
+                }
+
+                private void botaoMenuPrincipalActionPerformed(ActionEvent evt) {
+                    MostraFeed.this.dispose();
+                    new MenuPrincipal().setVisible(true);
+
+                }
+            });
+            this.add(botaoMenuPrincipal);
 
         } finally {
             this.setVisible(true);
