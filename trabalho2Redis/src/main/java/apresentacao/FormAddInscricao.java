@@ -83,13 +83,13 @@ public class FormAddInscricao extends javax.swing.JFrame {
 
             painelNome.setBounds(100, 100, 300, 30);
             painelUrl.setBounds(100, 140, 300, 30);
-            painelCategoria.setBounds(100, 180, 300, 30);
+            painelCategoria.setBounds(100, 180, 400, 40);
             this.add(painelNome);
             this.add(painelUrl);
             this.add(painelCategoria);
 
             botaoSalvar = new JButton();
-            botaoSalvar.setBounds(100, 220, 100, 30);
+            botaoSalvar.setBounds(100, 400, 100, 30);
 
             botaoSalvar.setText("Salvar");
             botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
