@@ -25,34 +25,36 @@ public class Main {
 
     public static void main(String[] args) throws IllegalArgumentException, FeedException {
         
-        Inscricao inscricao = new Inscricao();
-        inscricao.setUrl("https://diolinux.com.br/feed");
-        inscricao.setNome("IFRS");
         
         
-        SyndFeedInput input = new SyndFeedInput();
-        SyndFeed feed = input.build(new InputSource(inscricao.getUrl()));
-        Iterator itr = feed.getEntries().iterator();
-        while (itr.hasNext()) {
-            Artigo artigo = new Artigo();
-            SyndEntry syndEntry = (SyndEntry) itr.next();
-            artigo.setAutor(syndEntry.getAuthor());
-            artigo.setLink(syndEntry.getLink());
-            List<SyndContent> conteudos = syndEntry.getContents();
-            String result = "";
-            for(SyndContent conteudo: conteudos){                
-               result = result + conteudo.getValue();              
-            }
-            String conteudoFinal = result.replaceAll("\\n", "");
-            conteudoFinal = conteudoFinal.replaceAll("<[^>]*>", "");
-            artigo.setConteudo(conteudoFinal);
-            artigo.setTitulo(syndEntry.getTitle());
-            artigo.setData(syndEntry.getPublishedDate());
-            inscricao.getArtigos().add(artigo);   
-        }
-        InscricaoDAO inscricaoDAO = new InscricaoDAO();
-        inscricaoDAO.adicionar(inscricao);
-        
-       System.out.println(inscricao.getArtigos().get(0).toString());
-    }
+//        Inscricao inscricao = new Inscricao();
+//        inscricao.setUrl("https://diolinux.com.br/feed");
+//        inscricao.setNome("IFRS");
+//        
+//        
+//        SyndFeedInput input = new SyndFeedInput();
+//        SyndFeed feed = input.build(new InputSource(inscricao.getUrl()));
+//        Iterator itr = feed.getEntries().iterator();
+//        while (itr.hasNext()) {
+//            Artigo artigo = new Artigo();
+//            SyndEntry syndEntry = (SyndEntry) itr.next();
+//            artigo.setAutor(syndEntry.getAuthor());
+//            artigo.setLink(syndEntry.getLink());
+//            List<SyndContent> conteudos = syndEntry.getContents();
+//            String result = "";
+//            for(SyndContent conteudo: conteudos){                
+//               result = result + conteudo.getValue();              
+//            }
+//            String conteudoFinal = result.replaceAll("\\n", "");
+//            conteudoFinal = conteudoFinal.replaceAll("<[^>]*>", "");
+//            artigo.setConteudo(conteudoFinal);
+//            artigo.setTitulo(syndEntry.getTitle());
+//            artigo.setData(syndEntry.getPublishedDate());
+//            inscricao.getArtigos().add(artigo);   
+//        }
+//        InscricaoDAO inscricaoDAO = new InscricaoDAO();
+//        inscricaoDAO.adicionar(inscricao);
+//        
+//       System.out.println(inscricao.getArtigos().get(0).toString());
+//    }
 }
