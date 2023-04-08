@@ -5,6 +5,7 @@
 package negocio;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -12,21 +13,22 @@ import java.util.ArrayList;
  */
 public class Inscricao {
     
-    private int id;
+    private UUID id;
     private String nome;
     private String url;    
     private String categoria;
     private ArrayList<Artigo> artigos;
 
     public Inscricao() {
+        this.id = UUID.randomUUID();
         this.artigos = new ArrayList<>();
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

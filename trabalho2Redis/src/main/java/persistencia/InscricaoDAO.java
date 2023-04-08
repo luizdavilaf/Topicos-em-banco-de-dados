@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import negocio.Inscricao;
 
 /**
@@ -39,23 +40,26 @@ public class InscricaoDAO {
 
     public void atualizar(Inscricao inscricao) {
         this.conexao = new Conexao();
-        if (this.conexao.getConexao().exists(String.valueOf(inscricao.getId()))) {
-            this.conexao.getConexao().set(String.valueOf(inscricao.getId()), this.gson.toJson(inscricao));
+        if (this.conexao.getConexao().exists(inscricao.getId().toString())) {
+            this.conexao.getConexao().set(inscricao.getId().toString(), this.gson.toJson(inscricao));
         }
         this.conexao.fechar();
     }
     
     public void adicionar(Inscricao inscricao) {
         this.conexao = new Conexao();
-        this.conexao.getConexao().set(String.valueOf(inscricao.getId()), this.gson.toJson(inscricao));
+        if (this.conexao.getConexao().exists(inscricao.getId().toString())) {
+            inscricao.setId(UUID.randomUUID());
+        }        
+        this.conexao.getConexao().set(inscricao.getId().toString(), this.gson.toJson(inscricao));
         this.conexao.fechar();
     }
     
-    public Inscricao obter(int id) {
+    public Inscricao obter(UUID id) {
         this.conexao = new Conexao();
-        Inscricao anotacao = this.gson.fromJson(this.conexao.getConexao().get(Integer.toString(id)), Inscricao.class);
+        Inscricao inscricao = this.gson.fromJson(this.conexao.getConexao().get(id.toString()), Inscricao.class);
         this.conexao.fechar();
-        return anotacao;
+        return inscricao;
 
     }
     
@@ -67,8 +71,8 @@ public class InscricaoDAO {
         while (iterator.hasNext()) {
             Object id = iterator.next();
             String json = this.conexao.getConexao().get(id.toString());
-            Inscricao anotacao = this.gson.fromJson(json, Inscricao.class);
-            vetInscricao.add(anotacao);
+            Inscricao inscricao = this.gson.fromJson(json, Inscricao.class);
+            vetInscricao.add(inscricao);
         }
         this.conexao.fechar();
         return vetInscricao;
