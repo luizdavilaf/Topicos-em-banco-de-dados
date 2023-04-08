@@ -34,23 +34,29 @@ public class InscricaoDAO {
     public InscricaoDAO() {
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
+                .disableHtmlEscaping()
+                .setPrettyPrinting()
                 .create();
     }
 
     public void atualizar(Inscricao inscricao) {
         this.conexao = new Conexao();
         if (this.conexao.getConexao().exists(String.valueOf(inscricao.getId()))) {
-            this.conexao.getConexao().set(String.valueOf(inscricao.getId()), this.gson.toJson(inscricao));
+            String json = this.gson.toJson(inscricao);
+            this.conexao.getConexao().set(String.valueOf(inscricao.getId()), json);
+
         }
         this.conexao.fechar();
     }
-    
+
     public void adicionar(Inscricao inscricao) {
         this.conexao = new Conexao();
-        this.conexao.getConexao().set(String.valueOf(inscricao.getId()), this.gson.toJson(inscricao));
+        String json = this.gson.toJson(inscricao);
+        this.conexao.getConexao().set(String.valueOf(inscricao.getId()), json);
+
         this.conexao.fechar();
     }
-    
+
     public Inscricao obter(int id) {
         this.conexao = new Conexao();
         Inscricao anotacao = this.gson.fromJson(this.conexao.getConexao().get(Integer.toString(id)), Inscricao.class);
@@ -58,7 +64,7 @@ public class InscricaoDAO {
         return anotacao;
 
     }
-    
+
     public List<Inscricao> listar() {
         this.conexao = new Conexao();
         Set<String> vetLabels = this.conexao.getConexao().keys("*");
@@ -74,15 +80,6 @@ public class InscricaoDAO {
         return vetInscricao;
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
     public class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
 
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss");
