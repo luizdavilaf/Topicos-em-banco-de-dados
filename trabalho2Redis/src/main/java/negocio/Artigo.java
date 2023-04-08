@@ -5,19 +5,20 @@
 package negocio;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
  * @author luizd
  */
-class Artigo {
+public class Artigo {
 
     private String titulo;
     private String link;
     private String autor;
     private String imgUrl;
     private String conteudo;
-    private LocalDateTime data;
+    private Date data;
 
     public Artigo() {
     }
@@ -54,11 +55,11 @@ class Artigo {
         this.conteudo = conteudo;
     }
 
-    public LocalDateTime getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
@@ -69,4 +70,11 @@ class Artigo {
     public void setAutor(String autor) {
         this.autor = autor;
     }
+
+    @Override
+    public String toString() {
+        return "Artigo{" + "titulo=" + titulo + ", link=" + link + ", autor=" + autor + ", imgUrl=" + imgUrl + ", conteudo=" + conteudo + ", data=" + data.toString() + '}';
+    }
+    
+    
 }
