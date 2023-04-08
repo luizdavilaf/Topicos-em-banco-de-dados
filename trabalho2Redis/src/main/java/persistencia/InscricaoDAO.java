@@ -52,17 +52,16 @@ public class InscricaoDAO {
         this.conexao = new Conexao();
         if (this.conexao.getConexao().exists(inscricao.getId().toString())) {
             inscricao.setId(UUID.randomUUID());
-        }        
+        }
         this.conexao.getConexao().set(inscricao.getId().toString(), this.gson.toJson(inscricao));
         this.conexao.fechar();
     }
-    
+
     public Inscricao obter(UUID id) {
         this.conexao = new Conexao();
         Inscricao inscricao = this.gson.fromJson(this.conexao.getConexao().get(id.toString()), Inscricao.class);
         this.conexao.fechar();
         return inscricao;
-
     }
 
     public List<Inscricao> listar() {
@@ -78,6 +77,12 @@ public class InscricaoDAO {
         }
         this.conexao.fechar();
         return vetInscricao;
+    }
+
+    public void remover(Inscricao inscricao) {
+        this.conexao = new Conexao();
+        this.conexao.getConexao().del(inscricao.getId().toString());
+        this.conexao.fechar();
     }
 
     public class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {

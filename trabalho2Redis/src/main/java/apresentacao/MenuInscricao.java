@@ -5,9 +5,8 @@
 package apresentacao;
 
 import java.util.List;
-import negocio.Paciente;
-import negocio.Paciente;
-import persistencia.PacienteDAO;
+import negocio.Inscricao;
+import persistencia.InscricaoDAO;
 
 /**
  *
@@ -16,7 +15,7 @@ import persistencia.PacienteDAO;
 public class MenuInscricao extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuPaciente
+     * Creates new form MenuInscricao
      */
     public MenuInscricao() {
         initComponents();
@@ -35,32 +34,32 @@ public class MenuInscricao extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        botaoAddSetor = new javax.swing.JButton();
-        botaoGetSetor = new javax.swing.JButton();
+        botaoAddInscricao = new javax.swing.JButton();
+        botaoGetInscricao = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1024, 768));
 
-        botaoAddSetor.setBackground(new java.awt.Color(51, 153, 255));
-        botaoAddSetor.setForeground(new java.awt.Color(255, 255, 255));
-        botaoAddSetor.setText("Adicionar Inscrição");
-        botaoAddSetor.setActionCommand("CRUD_Setor");
-        botaoAddSetor.addActionListener(new java.awt.event.ActionListener() {
+        botaoAddInscricao.setBackground(new java.awt.Color(51, 153, 255));
+        botaoAddInscricao.setForeground(new java.awt.Color(255, 255, 255));
+        botaoAddInscricao.setText("Adicionar Inscrição");
+        botaoAddInscricao.setActionCommand("CRUD_Setor");
+        botaoAddInscricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAddSetorActionPerformed(evt);
+                botaoAddInscricaoActionPerformed(evt);
             }
         });
 
-        botaoGetSetor.setBackground(new java.awt.Color(51, 153, 255));
-        botaoGetSetor.setForeground(new java.awt.Color(255, 255, 255));
-        botaoGetSetor.setText("Ver/Editar/Deletar Inscrições");
-        botaoGetSetor.setActionCommand("CRUD_Funcionário");
-        botaoGetSetor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        botaoGetSetor.addActionListener(new java.awt.event.ActionListener() {
+        botaoGetInscricao.setBackground(new java.awt.Color(51, 153, 255));
+        botaoGetInscricao.setForeground(new java.awt.Color(255, 255, 255));
+        botaoGetInscricao.setText("Ver/Editar/Deletar Inscrições");
+        botaoGetInscricao.setActionCommand("CRUD_Funcionário");
+        botaoGetInscricao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botaoGetInscricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGetSetorActionPerformed(evt);
+                botaoGetInscricaoActionPerformed(evt);
             }
         });
 
@@ -95,8 +94,8 @@ public class MenuInscricao extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(263, 263, 263)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(botaoGetSetor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botaoAddSetor, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+                    .addComponent(botaoGetInscricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoAddInscricao, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,9 +103,9 @@ public class MenuInscricao extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(108, 108, 108)
-                .addComponent(botaoAddSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoAddInscricao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(botaoGetSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoGetInscricao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(371, Short.MAX_VALUE))
         );
 
@@ -126,25 +125,20 @@ public class MenuInscricao extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoAddSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddSetorActionPerformed
+    private void botaoAddInscricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddInscricaoActionPerformed
 
-        
-        try {
-            Paciente paciente = new Paciente();
-            new FormAddPac("add", paciente).setVisible(true);
-        } finally {
-            MenuInscricao.this.setVisible(false);
-        }
-        
-    }//GEN-LAST:event_botaoAddSetorActionPerformed
+        Inscricao paciente = new Inscricao();
+        new FormAddInscricao("add", paciente).setVisible(true);
 
-    private void botaoGetSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGetSetorActionPerformed
-        
-        MenuInscricao.this.setVisible(false);
-        new MostraPacientes().setVisible(true);
-        
-        
-    }//GEN-LAST:event_botaoGetSetorActionPerformed
+    }//GEN-LAST:event_botaoAddInscricaoActionPerformed
+
+    private void botaoGetInscricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGetInscricaoActionPerformed
+
+        new MostraInscricoes().setVisible(true);
+        MenuInscricao.this.dispose();
+
+
+    }//GEN-LAST:event_botaoGetInscricaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,8 +183,8 @@ public class MenuInscricao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoAddSetor;
-    private javax.swing.JButton botaoGetSetor;
+    private javax.swing.JButton botaoAddInscricao;
+    private javax.swing.JButton botaoGetInscricao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

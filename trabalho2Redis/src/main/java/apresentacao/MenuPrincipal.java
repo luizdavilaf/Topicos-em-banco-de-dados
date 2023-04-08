@@ -15,12 +15,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
-        this.setSize(1024, 768);        
+        this.setSize(1024, 768);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
     }
 
     /**
@@ -33,8 +33,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        botaoSetor = new javax.swing.JButton();
-        botaoFuncionario = new javax.swing.JButton();
+        botaoInscricoes = new javax.swing.JButton();
+        botaoLerFeeds = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -42,24 +42,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setTitle("menu_principal");
         setSize(new java.awt.Dimension(1024, 768));
 
-        botaoSetor.setBackground(new java.awt.Color(51, 153, 255));
-        botaoSetor.setForeground(new java.awt.Color(255, 255, 255));
-        botaoSetor.setText("CRUD Inscrições");
-        botaoSetor.setActionCommand("CRUD_Setor");
-        botaoSetor.addActionListener(new java.awt.event.ActionListener() {
+        botaoInscricoes.setBackground(new java.awt.Color(51, 153, 255));
+        botaoInscricoes.setForeground(new java.awt.Color(255, 255, 255));
+        botaoInscricoes.setText("CRUD Inscrições");
+        botaoInscricoes.setActionCommand("CRUD_Setor");
+        botaoInscricoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoSetorActionPerformed(evt);
+                botaoInscricoesActionPerformed(evt);
             }
         });
 
-        botaoFuncionario.setBackground(new java.awt.Color(51, 153, 255));
-        botaoFuncionario.setForeground(new java.awt.Color(255, 255, 255));
-        botaoFuncionario.setText("Ler Feeds");
-        botaoFuncionario.setActionCommand("CRUD_Funcionário");
-        botaoFuncionario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        botaoFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        botaoLerFeeds.setBackground(new java.awt.Color(51, 153, 255));
+        botaoLerFeeds.setForeground(new java.awt.Color(255, 255, 255));
+        botaoLerFeeds.setText("Ler Feeds");
+        botaoLerFeeds.setActionCommand("CRUD_Funcionário");
+        botaoLerFeeds.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botaoLerFeeds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoFuncionarioActionPerformed(evt);
+                botaoLerFeedsActionPerformed(evt);
             }
         });
 
@@ -97,10 +97,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(355, 355, 355)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(botaoSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoInscricoes, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(botaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoLerFeeds, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -108,9 +108,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botaoSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoInscricoes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoLerFeeds, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(342, Short.MAX_VALUE))
         );
 
@@ -130,21 +130,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFuncionarioActionPerformed
+    private void botaoLerFeedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLerFeedsActionPerformed
         // TODO add your handling code here:
-        new MenuFuncionario().setVisible(true);
-        MenuPrincipal.this.setVisible(false);
-    }//GEN-LAST:event_botaoFuncionarioActionPerformed
+        new MenuInscricao().setVisible(true);
+        MenuPrincipal.this.dispose();
+    }//GEN-LAST:event_botaoLerFeedsActionPerformed
 
-    private void botaoSetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSetorActionPerformed
+    private void botaoInscricoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInscricoesActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuSetor().setVisible(true);
-                MenuPrincipal.this.setVisible(false);
+                new MenuInscricao().setVisible(true);
+                MenuPrincipal.this.dispose();
             }
         });
-    }//GEN-LAST:event_botaoSetorActionPerformed
+    }//GEN-LAST:event_botaoInscricoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,8 +182,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoFuncionario;
-    private javax.swing.JButton botaoSetor;
+    private javax.swing.JButton botaoInscricoes;
+    private javax.swing.JButton botaoLerFeeds;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

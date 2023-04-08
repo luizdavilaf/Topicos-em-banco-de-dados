@@ -12,6 +12,8 @@ import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JFrame;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import negocio.Artigo;
 import negocio.Inscricao;
 import org.xml.sax.InputSource;
@@ -24,9 +26,18 @@ import persistencia.InscricaoDAO;
 public class Main {
 
     public static void main(String[] args) throws IllegalArgumentException, FeedException {
-        
-        
-        
+        System.out.println("começando");
+        JFrame telaPrincipal = new JFrame("Leitor de Feeds");
+
+        telaPrincipal.setSize(1024, 768);
+        telaPrincipal.setLocationRelativeTo(null);
+        telaPrincipal.setResizable(false);
+        telaPrincipal.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        telaPrincipal.setLayout(null);
+        telaPrincipal.setVisible(true);
+
+        new MenuPrincipal().setVisible(true);
+
 //        Inscricao inscricao = new Inscricao();
 //        inscricao.setUrl("https://diolinux.com.br/feed");
 //        inscricao.setNome("IFRS");
@@ -56,5 +67,5 @@ public class Main {
 //        inscricaoDAO.adicionar(inscricao);
 //        
 //       System.out.println(inscricao.getArtigos().get(0).toString());
-//    }
+    }
 }

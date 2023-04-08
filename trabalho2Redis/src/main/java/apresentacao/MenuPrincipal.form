@@ -53,11 +53,11 @@
                   <EmptySpace min="-2" pref="355" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="botaoSetor" min="-2" pref="264" max="-2" attributes="0"/>
+                          <Component id="botaoInscricoes" min="-2" pref="264" max="-2" attributes="0"/>
                           <EmptySpace min="54" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="botaoFuncionario" min="-2" pref="264" max="-2" attributes="0"/>
+                          <Component id="botaoLerFeeds" min="-2" pref="264" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -69,16 +69,16 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="botaoSetor" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="botaoInscricoes" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="botaoFuncionario" min="-2" pref="102" max="-2" attributes="0"/>
+                  <Component id="botaoLerFeeds" min="-2" pref="102" max="-2" attributes="0"/>
                   <EmptySpace pref="342" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="botaoSetor">
+        <Component class="javax.swing.JButton" name="botaoInscricoes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -90,10 +90,10 @@
             <Property name="actionCommand" type="java.lang.String" value="CRUD_Setor"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoSetorActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoInscricoesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="botaoFuncionario">
+        <Component class="javax.swing.JButton" name="botaoLerFeeds">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -108,7 +108,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoFuncionarioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoLerFeedsActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
