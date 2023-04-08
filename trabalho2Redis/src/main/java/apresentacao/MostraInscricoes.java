@@ -21,6 +21,7 @@ public class MostraInscricoes extends javax.swing.JFrame {
 
     javax.swing.JList<String> listaInscricoes;
     javax.swing.JButton botaoEditar;
+    javax.swing.JButton botaoLerFeed;
     javax.swing.JButton botaoMenuPrincipal;
     javax.swing.JButton botaoDeletar;
     List<Inscricao> listaInscricoesObjeto;
@@ -75,7 +76,7 @@ public class MostraInscricoes extends javax.swing.JFrame {
         this.add(botaoEditar);
 
         botaoMenuPrincipal = new JButton();
-        botaoMenuPrincipal.setBounds(300, 300, 100, 30);
+        botaoMenuPrincipal.setBounds(400, 300, 100, 30);
         botaoMenuPrincipal.setHorizontalAlignment(2);
 
         botaoMenuPrincipal.setText("Menu");
@@ -127,6 +128,33 @@ public class MostraInscricoes extends javax.swing.JFrame {
             }
         });
         this.add(botaoDeletar);
+
+        botaoLerFeed = new JButton();
+        botaoLerFeed.setBounds(300, 300, 100, 30);
+        botaoLerFeed.setHorizontalAlignment(2);
+
+        botaoLerFeed.setText("Ler Feed");
+        botaoLerFeed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoLerFeedActionPerformed(evt);
+            }
+
+            private void botaoLerFeedActionPerformed(ActionEvent evt) {
+
+                if (listaInscricoes.getSelectedIndex() != -1) {
+                    try {
+
+                        Inscricao inscricao = listaInscricoesObjeto.get(listaInscricoes.getSelectedIndex());
+                        MostraInscricoes.this.dispose();
+                        new MostraFeed(0, inscricao).setVisible(true);
+
+                    } catch (Exception e) {
+                        System.out.println("Erro ao ler feed");
+                    }
+                }
+            }
+        });
+        this.add(botaoLerFeed);
 
         this.setVisible(true);
     }

@@ -13,15 +13,24 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.rometools.rome.feed.synd.SyndContent;
+import com.rometools.rome.feed.synd.SyndEntry;
+import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.io.FeedException;
+import com.rometools.rome.io.SyndFeedInput;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import negocio.Artigo;
 import negocio.Inscricao;
+import org.xml.sax.InputSource;
 
 /**
  *
@@ -48,7 +57,35 @@ public class InscricaoDAO {
         this.conexao.fechar();
     }
 
-    public void adicionar(Inscricao inscricao) {
+    public void adicionar(Inscricao inscricao) throws FeedException {
+                
+        
+        
+        
+        SyndFeedInput input = new SyndFeedInput();
+        SyndFeed feed = input.build(new InputSource(inscricao.getUrl()));
+        Iterator itr = feed.getEntries().iterator();
+        while (itr.hasNext()) {
+            Artigo artigo = new Artigo();
+            SyndEntry syndEntry = (SyndEntry) itr.next();
+            artigo.setAutor(syndEntry.getAuthor());
+            artigo.setLink(syndEntry.getLink());
+            List<SyndContent> conteudos = syndEntry.getContents();
+            String result = "";
+            for(SyndContent conteudo: conteudos){                
+               result = result + conteudo.getValue();              
+            }
+            String conteudoFinal = result.replaceAll("\\n", "");
+            conteudoFinal = conteudoFinal.replaceAll("<[^>]*>", "");
+            artigo.setConteudo(conteudoFinal);
+            artigo.setTitulo(syndEntry.getTitle());
+            artigo.setData(syndEntry.getPublishedDate());
+            inscricao.getArtigos().add(artigo);   
+        }
+        
+        
+        inscricao.getArtigos().sort(Comparator.comparing(Artigo::getData).reversed());
+        
         this.conexao = new Conexao();
         if (this.conexao.getConexao().exists(inscricao.getId().toString())) {
             inscricao.setId(UUID.randomUUID());
