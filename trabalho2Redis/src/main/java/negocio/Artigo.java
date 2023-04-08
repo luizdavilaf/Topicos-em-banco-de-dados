@@ -73,7 +73,7 @@ public class Artigo {
 
     @Override
     public String toString() {
-        return "[" + "titulo=" + titulo + ", link=" + link + ", autor=" + autor + ", data=" + data.toString() + ']';
+        return "[" + "titulo=" + titulo + ", autor=" + autor + ", data=" + data.toString() + ']';
     }
     
     

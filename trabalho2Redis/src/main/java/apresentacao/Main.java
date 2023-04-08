@@ -31,7 +31,7 @@ public class Main {
 
         telaPrincipal.setSize(1024, 768);
         telaPrincipal.setLocationRelativeTo(null);
-        telaPrincipal.setResizable(false);
+        telaPrincipal.setResizable(true);
         telaPrincipal.setDefaultCloseOperation(EXIT_ON_CLOSE);
         telaPrincipal.setLayout(null);
         telaPrincipal.setVisible(true);
