@@ -77,16 +77,16 @@ public class MostraFeed extends javax.swing.JFrame {
                     JTextArea conteudoArt2 = new JTextArea(artigo2.getConteudo().toString());
                     JPanel painelArtigo2 = new JPanel();
                     JLabel labelArtigo2 = new JLabel(artigo2.toString());
+                    painel.add(scrooll);
+                    painel.add(Box.createVerticalStrut(5));
                     painelArtigo2.add(labelArtigo2);
                     painelArtigo2.add(conteudoArt2);
                     painelArtigo2.setBounds(50, 250, 1000, 200);
 
                     conteudoArt2.setLineWrap(true);
                     conteudoArt2.setWrapStyleWord(true);
-
                     // Cria barra de rolagem e adiciona a area de texto
                     JScrollPane scrooll = new JScrollPane(conteudoArt2);
-
                     // Adiciona valores as propriedades da barra de rolagem
                     // Barra vertical
                     scrooll.setVerticalScrollBarPolicy(
