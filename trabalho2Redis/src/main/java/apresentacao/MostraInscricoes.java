@@ -87,7 +87,7 @@ public class MostraInscricoes extends javax.swing.JFrame {
 
             private void botaoMenuPrincipalActionPerformed(ActionEvent evt) {
                 MostraInscricoes.this.dispose();
-                new MenuPrincipal().setVisible(true);
+                new MenuInscricao().setVisible(true);
 
             }
         });
@@ -118,7 +118,7 @@ public class MostraInscricoes extends javax.swing.JFrame {
                             System.out.println("Erro banco delete");
                         } finally {
                             MostraInscricoes.this.dispose();
-                            new MenuPrincipal().setVisible(true);
+                            new MenuInscricao().setVisible(true);
                         }
 
                     } catch (Exception e) {

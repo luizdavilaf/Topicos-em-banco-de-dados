@@ -113,10 +113,10 @@ public class FormAddInscricao extends javax.swing.JFrame {
                     } catch (Exception e) {
                         System.out.println("Erro ao salvar");
                         FormAddInscricao.this.dispose();
-                        new MenuPrincipal().setVisible(true);
+                        new MenuInscricao().setVisible(true);
                     } finally {
                         FormAddInscricao.this.dispose();
-                        new MenuPrincipal().setVisible(true);
+                        new MenuInscricao().setVisible(true);
                     }
                 }
             });

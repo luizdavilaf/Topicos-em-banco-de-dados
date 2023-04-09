@@ -4,16 +4,19 @@
  */
 package apresentacao;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import negocio.Artigo;
@@ -77,6 +80,26 @@ public class MostraFeed extends javax.swing.JFrame {
                     painelArtigo2.add(labelArtigo2);
                     painelArtigo2.add(conteudoArt2);
                     painelArtigo2.setBounds(50, 250, 1000, 200);
+
+                    conteudoArt2.setLineWrap(true);
+                    conteudoArt2.setWrapStyleWord(true);
+
+                    // Cria barra de rolagem e adiciona a area de texto
+                    JScrollPane scrooll = new JScrollPane(conteudoArt2);
+
+                    // Adiciona valores as propriedades da barra de rolagem
+                    // Barra vertical
+                    scrooll.setVerticalScrollBarPolicy(
+                            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                    // Tamanho da barra
+                    scrooll.setPreferredSize(new Dimension(250, 250));
+                    // Borda com titulo
+                    scrooll.setBorder(
+                            BorderFactory.createCompoundBorder(
+                                    BorderFactory.createCompoundBorder(
+                                            BorderFactory.createTitledBorder("Caixa de Texto"),
+                                            BorderFactory.createEmptyBorder(5, 5, 5, 5)),
+                                    scrooll.getBorder()));
                     this.add(painelArtigo2);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Sem artigo");
@@ -152,7 +175,7 @@ public class MostraFeed extends javax.swing.JFrame {
 
                 private void botaoMenuPrincipalActionPerformed(ActionEvent evt) {
                     MostraFeed.this.dispose();
-                    new MenuPrincipal().setVisible(true);
+                    new MenuInscricao().setVisible(true);
 
                 }
             });
