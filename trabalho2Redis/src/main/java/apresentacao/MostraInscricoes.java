@@ -37,7 +37,7 @@ public class MostraInscricoes extends javax.swing.JFrame {
         listaInscricoesObjeto = inscricaoDAO.listar();
         DefaultListModel<String> listaTemp = new DefaultListModel<>();
         for (int i = 0; i < listaInscricoesObjeto.size(); i++) {
-            listaTemp.addElement((listaInscricoesObjeto.get(i).getNome()));
+            listaTemp.addElement((listaInscricoesObjeto.get(i).toString()));
         }
         listaInscricoes = new JList<>(listaTemp);
         listaInscricoes.setBounds(100, 100, 400, 200);

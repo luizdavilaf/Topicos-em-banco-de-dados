@@ -22,7 +22,6 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +48,9 @@ public class InscricaoDAO {
                 .create();
     }
 
-    public void atualizar(Inscricao inscricao) {
+    public void atualizar(Inscricao inscricao) throws FeedException {
+        inscricao.getArtigos().removeAll(inscricao.getArtigos());
+        inscricao = gerarArtigosPaginados(inscricao);  
         this.conexao = new Conexao();
         if (this.conexao.getConexao().exists(inscricao.getId().toString())) {
             this.conexao.getConexao().set(inscricao.getId().toString(), this.gson.toJson(inscricao));
@@ -58,34 +59,9 @@ public class InscricaoDAO {
     }
 
     public void adicionar(Inscricao inscricao) throws FeedException {
-                
+        inscricao = gerarArtigosPaginados(inscricao);    
         
-        
-        
-        SyndFeedInput input = new SyndFeedInput();
-        SyndFeed feed = input.build(new InputSource(inscricao.getUrl()));
-        Iterator itr = feed.getEntries().iterator();
-        while (itr.hasNext()) {
-            Artigo artigo = new Artigo();
-            SyndEntry syndEntry = (SyndEntry) itr.next();
-            artigo.setAutor(syndEntry.getAuthor());
-            artigo.setLink(syndEntry.getLink());
-            List<SyndContent> conteudos = syndEntry.getContents();
-            String result = "";
-            for(SyndContent conteudo: conteudos){                
-               result = result + conteudo.getValue();              
-            }
-            String conteudoFinal = result.replaceAll("\\n", "");
-            conteudoFinal = conteudoFinal.replaceAll("<[^>]*>", "");
-            artigo.setConteudo(conteudoFinal);
-            artigo.setTitulo(syndEntry.getTitle());
-            artigo.setData(syndEntry.getPublishedDate());
-            inscricao.getArtigos().add(artigo);   
-        }
-        
-        
-        inscricao.getArtigos().sort(Comparator.comparing(Artigo::getData).reversed());
-        
+
         this.conexao = new Conexao();
         if (this.conexao.getConexao().exists(inscricao.getId().toString())) {
             inscricao.setId(UUID.randomUUID());
@@ -120,6 +96,40 @@ public class InscricaoDAO {
         this.conexao = new Conexao();
         this.conexao.getConexao().del(inscricao.getId().toString());
         this.conexao.fechar();
+    }
+
+    private Inscricao gerarArtigosPaginados(Inscricao inscricao) throws FeedException {
+        SyndFeedInput input = new SyndFeedInput();
+        SyndFeed feed = input.build(new InputSource(inscricao.getUrl()));
+        Iterator itr = feed.getEntries().iterator();
+
+        while (itr.hasNext()) {
+            Artigo artigo = new Artigo();
+            SyndEntry syndEntry = (SyndEntry) itr.next();
+            artigo.setAutor(syndEntry.getAuthor());
+            artigo.setLink(syndEntry.getLink());
+            List<SyndContent> conteudos = syndEntry.getContents();
+            String result = "";
+            for (SyndContent conteudo : conteudos) {
+                result = result + conteudo.getValue();
+            }
+            String conteudoFinal = result.replaceAll("\\n", "");
+            conteudoFinal = conteudoFinal.replaceAll("<[^>]*>", "");
+            artigo.setConteudo(conteudoFinal);
+            artigo.setTitulo(syndEntry.getTitle());
+            artigo.setData(syndEntry.getPublishedDate());
+            inscricao.getArtigos().add(artigo);
+        }
+
+        inscricao.getArtigos().sort(Comparator.comparing(Artigo::getData).reversed());
+
+        for (int i = 0; i < inscricao.getArtigos().size(); i++) {
+            Artigo artigo = inscricao.getArtigos().get(i);
+            artigo.setPagina((int) Math.ceil((i + 1) / 3));
+        }
+        inscricao.setTotal_articles(inscricao.getArtigos().size());
+        inscricao.setTotal_pages((int) Math.ceil((inscricao.getArtigos().size() + 1) / 3));
+        return inscricao;
     }
 
     public class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {

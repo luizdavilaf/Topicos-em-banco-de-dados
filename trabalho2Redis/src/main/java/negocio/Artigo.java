@@ -19,6 +19,7 @@ public class Artigo {
     private String imgUrl;
     private String conteudo;
     private Date data;
+    private int pagina;
 
     public Artigo() {
     }
@@ -73,7 +74,15 @@ public class Artigo {
 
     @Override
     public String toString() {
-        return "[" + "titulo=" + titulo + ", autor=" + autor + ", data=" + data.toString() + ']';
+        return "<html>titulo=" + titulo + "<br> autor=" + autor + ",data=" + data.toString()+"</html>";
+    }
+
+    public int getPagina() {
+        return pagina;
+    }
+
+    public void setPagina(int pagina) {
+        this.pagina = pagina;
     }
     
     

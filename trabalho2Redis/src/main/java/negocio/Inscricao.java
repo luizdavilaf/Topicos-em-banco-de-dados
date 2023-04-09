@@ -18,6 +18,8 @@ public class Inscricao {
     private String url;    
     private String categoria;
     private ArrayList<Artigo> artigos;
+    private int total_pages;
+    private int total_articles;
 
     public Inscricao() {
         this.id = UUID.randomUUID();
@@ -64,6 +66,27 @@ public class Inscricao {
 
     public void setArtigos(ArrayList<Artigo> artigos) {
         this.artigos = artigos;
+    }
+
+    public int getTotal_pages() {
+        return total_pages;
+    }
+
+    public void setTotal_pages(int total_pages) {
+        this.total_pages = total_pages;
+    }
+
+    public int getTotal_articles() {
+        return total_articles;
+    }
+
+    public void setTotal_articles(int total_articles) {
+        this.total_articles = total_articles;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + "nome=" + nome + ", categoria=" + categoria + ", Artigos=" + total_articles + ']';
     }
     
     

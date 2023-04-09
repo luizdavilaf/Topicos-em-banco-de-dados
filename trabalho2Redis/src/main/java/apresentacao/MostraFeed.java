@@ -4,6 +4,7 @@
  */
 package apresentacao;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -66,7 +67,28 @@ public class MostraFeed extends javax.swing.JFrame {
                 JLabel labelArtigo1 = new JLabel(artigo.toString());
                 painelArtigo1.add(labelArtigo1);
                 painelArtigo1.add(conteudoArt1);
-                painelArtigo1.setBounds(50, 30, 1000, 200);
+                painelArtigo1.setBounds(50, 30, 900, 180);
+
+                conteudoArt1.setLineWrap(true);
+                conteudoArt1.setWrapStyleWord(true);
+
+                JScrollPane scrooll = new JScrollPane(conteudoArt1);
+
+                scrooll.setVerticalScrollBarPolicy(
+                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+                scrooll.setPreferredSize(new Dimension(900, 130));
+
+                scrooll.setBorder(
+                        BorderFactory.createCompoundBorder(
+                                BorderFactory.createCompoundBorder(
+                                        BorderFactory.createTitledBorder(""),
+                                        BorderFactory.createEmptyBorder(5, 5, 5, 5)),
+                                scrooll.getBorder()));
+                painelArtigo1.add(scrooll);
+
+                painelArtigo1.setAlignmentX(LEFT_ALIGNMENT);
+
                 this.add(painelArtigo1);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Sem artigo");
@@ -81,27 +103,28 @@ public class MostraFeed extends javax.swing.JFrame {
 
                     painelArtigo2.add(labelArtigo2);
                     painelArtigo2.add(conteudoArt2);
-                    painelArtigo2.setBounds(50, 250, 1000, 200);
+                    painelArtigo2.setBounds(50, 250, 900, 180);
 
                     conteudoArt2.setLineWrap(true);
                     conteudoArt2.setWrapStyleWord(true);
-                    // Cria barra de rolagem e adiciona a area de texto
+
                     JScrollPane scrooll = new JScrollPane(conteudoArt2);
-                    // Adiciona valores as propriedades da barra de rolagem
-                    // Barra vertical
+
                     scrooll.setVerticalScrollBarPolicy(
                             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-                    // Tamanho da barra
-                    scrooll.setPreferredSize(new Dimension(250, 250));
-                    // Borda com titulo
+
+                    scrooll.setPreferredSize(new Dimension(900, 130));
+
                     scrooll.setBorder(
                             BorderFactory.createCompoundBorder(
                                     BorderFactory.createCompoundBorder(
-                                            BorderFactory.createTitledBorder("Caixa de Texto"),
+                                            BorderFactory.createTitledBorder(""),
                                             BorderFactory.createEmptyBorder(5, 5, 5, 5)),
                                     scrooll.getBorder()));
                     painelArtigo2.add(scrooll);
-                    painelArtigo2.add(Box.createVerticalStrut(5));
+
+                    painelArtigo2.setAlignmentX(LEFT_ALIGNMENT);
+
                     this.add(painelArtigo2);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Sem artigo");
@@ -114,7 +137,27 @@ public class MostraFeed extends javax.swing.JFrame {
                         JLabel labelArtigo3 = new JLabel(artigo3.toString());
                         painelArtigo3.add(labelArtigo3);
                         painelArtigo3.add(conteudoArt3);
-                        painelArtigo3.setBounds(50, 470, 1000, 200);
+                        painelArtigo3.setBounds(50, 470, 900, 180);
+
+                        conteudoArt3.setLineWrap(true);
+                        conteudoArt3.setWrapStyleWord(true);
+
+                        JScrollPane scrooll = new JScrollPane(conteudoArt3);
+
+                        scrooll.setVerticalScrollBarPolicy(
+                                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+                        scrooll.setPreferredSize(new Dimension(900, 130));
+
+                        scrooll.setBorder(
+                                BorderFactory.createCompoundBorder(
+                                        BorderFactory.createCompoundBorder(
+                                                BorderFactory.createTitledBorder(""),
+                                                BorderFactory.createEmptyBorder(5, 5, 5, 5)),
+                                        scrooll.getBorder()));
+                        painelArtigo3.add(scrooll);
+
+                        painelArtigo3.setAlignmentX(LEFT_ALIGNMENT);
                         this.add(painelArtigo3);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Sem artigo");
@@ -127,7 +170,7 @@ public class MostraFeed extends javax.swing.JFrame {
             try {
                 inscricaoOrigem.getArtigos().get(primeiroElemento - 1);
                 botaoPaginaAnterior = new JButton();
-                botaoPaginaAnterior.setBounds(100, 690, 150, 60);
+                botaoPaginaAnterior.setBounds(100, 670, 200, 50);
 
                 botaoPaginaAnterior.setText("Pagina Anterior");
                 botaoPaginaAnterior.addActionListener(new java.awt.event.ActionListener() {
@@ -142,13 +185,13 @@ public class MostraFeed extends javax.swing.JFrame {
                 });
                 this.add(botaoPaginaAnterior);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Sem artigo");
+
             }
 
             try {
                 inscricaoOrigem.getArtigos().get(primeiroElemento + 3);
                 botaoProximaPagina = new JButton();
-                botaoProximaPagina.setBounds(250, 690, 150, 60);
+                botaoProximaPagina.setBounds(301, 670, 200, 50);
 
                 botaoProximaPagina.setText("Proxima Pagina");
                 botaoProximaPagina.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +210,7 @@ public class MostraFeed extends javax.swing.JFrame {
             }
 
             botaoMenuPrincipal = new JButton();
-            botaoMenuPrincipal.setBounds(400, 690, 150, 60);
+            botaoMenuPrincipal.setBounds(501, 670, 200, 50);
 
             botaoMenuPrincipal.setText("Menu");
             botaoMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
