@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -77,8 +78,7 @@ public class MostraFeed extends javax.swing.JFrame {
                     JTextArea conteudoArt2 = new JTextArea(artigo2.getConteudo().toString());
                     JPanel painelArtigo2 = new JPanel();
                     JLabel labelArtigo2 = new JLabel(artigo2.toString());
-                    painel.add(scrooll);
-                    painel.add(Box.createVerticalStrut(5));
+
                     painelArtigo2.add(labelArtigo2);
                     painelArtigo2.add(conteudoArt2);
                     painelArtigo2.setBounds(50, 250, 1000, 200);
@@ -100,6 +100,8 @@ public class MostraFeed extends javax.swing.JFrame {
                                             BorderFactory.createTitledBorder("Caixa de Texto"),
                                             BorderFactory.createEmptyBorder(5, 5, 5, 5)),
                                     scrooll.getBorder()));
+                    painelArtigo2.add(scrooll);
+                    painelArtigo2.add(Box.createVerticalStrut(5));
                     this.add(painelArtigo2);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Sem artigo");
