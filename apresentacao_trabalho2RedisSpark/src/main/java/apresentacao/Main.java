@@ -27,7 +27,7 @@ public class Main {
     public static void main(String[] args) throws IllegalArgumentException, FeedException {
         Map map = new HashMap();
         map.put("name", "Sam");
-        MustacheTemplateEngine engine = new MustacheTemplateEngine();
+        
 
 
         get("/", (req, res) -> new ModelAndView(map, "index.html"), new MustacheTemplateEngine());
@@ -36,21 +36,7 @@ public class Main {
 
         get("/show-feeds", (req, res) -> showAll(req, res), new MustacheTemplateEngine());
 
-        post("/save-feed", (req, res) -> {
-            Inscricao inscricao = new Inscricao();
-            InscricaoDAO inscricaoDAO = new InscricaoDAO();
-            inscricao.setNome(req.queryParams("nome"));
-            inscricao.setUrl(req.queryParams("url"));
-            inscricao.setCategoria(req.queryParams("categoria"));
-            try {
-                inscricaoDAO.adicionar(inscricao);
-            } catch (Exception e) {
-                System.out.println(e);
-                return "Internal server error!";
-            }
-            res.redirect("/");
-            return "ok";
-        });
+        post("/save-feed", (req, res) -> saveFeed(req, res) );
 
     }
 
@@ -61,9 +47,27 @@ public class Main {
             model.put("feeds", inscricaoDAO.listar());
         } catch (Exception ex) {
             System.out.println(ex);
+            res.redirect("/");
         }
 
         return new ModelAndView(model, "mostraFeeds.html");
+    }
+
+    private static String saveFeed(Request req, Response res) {
+        Inscricao inscricao = new Inscricao();
+        InscricaoDAO inscricaoDAO = new InscricaoDAO();
+        inscricao.setNome(req.queryParams("nome"));
+        inscricao.setUrl(req.queryParams("url"));
+        inscricao.setCategoria(req.queryParams("categoria"));
+        try {
+            inscricaoDAO.adicionar(inscricao);
+        } catch (Exception e) {
+            System.out.println(e);
+            return "Internal server error!";
+        }
+        res.redirect("/");
+        return "ok";
+
     }
 
 }

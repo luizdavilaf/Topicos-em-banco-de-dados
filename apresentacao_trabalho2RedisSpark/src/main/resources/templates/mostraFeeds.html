@@ -24,12 +24,33 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       <h1>Feeds</h1>
 
       <div class="actions">
-        <label for="cars">Choose a car:</label>
+        <label for="cars">Escolha um Feed:</label>
 
         <select name="feeds1" id="feeds1">
           
           {{#feeds}}
-          <option value="volvo">{{nome}}</option>
+          <option value={{id}}>{{nome}}</option>
+          <table class='table table-striped table-secondary'>
+              <tr>
+                <th>Nome</th>
+                <th>Url</th>
+                <th>Categoria</th>
+               
+              </tr>
+              
+                <tr>                  
+                  <td>{{nome}}</td>
+                  <td>{{url}}</td>  
+                  <td>{{categoria}}</td>                 
+                  <td><a href='' class='btn btn-success'>Editar</a></td>                  
+                  <td><a href='' class='btn btn-danger'>Excluir</a></td>
+                  <td><a href='' class='btn btn-danger'>Ler Artigos</a></td>
+                </tr>                 
+                                
+                  
+            </table>
+
+
           
           {{/feeds}}
         </select>
