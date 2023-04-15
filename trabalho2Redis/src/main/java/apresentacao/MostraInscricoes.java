@@ -28,7 +28,7 @@ public class MostraInscricoes extends javax.swing.JFrame {
 
     public MostraInscricoes() {
         this.setSize(1024, 768);
-        this.setTitle("Mostra Inscrições");
+        this.setTitle("Mostra Inscriï¿½ï¿½es");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -145,8 +145,9 @@ public class MostraInscricoes extends javax.swing.JFrame {
                     try {
 
                         Inscricao inscricao = listaInscricoesObjeto.get(listaInscricoes.getSelectedIndex());
+                        inscricao = inscricao.lerArtigosPaginados(inscricao);
                         MostraInscricoes.this.dispose();
-                        new MostraFeed(0, inscricao).setVisible(true);
+                        new MostraFeed(0, inscricao, 3).setVisible(true);
 
                     } catch (Exception e) {
                         System.out.println("Erro ao ler feed");

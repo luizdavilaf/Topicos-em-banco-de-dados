@@ -37,6 +37,11 @@ public class MostraFeed extends javax.swing.JFrame {
     javax.swing.JButton botaoMenuPrincipal;
     private int pagina;
     private Inscricao inscricao;
+    private int limit;
+
+    public int getLimit() {
+        return limit;
+    }   
 
     public Inscricao getInscricao() {
         return inscricao;
@@ -46,10 +51,11 @@ public class MostraFeed extends javax.swing.JFrame {
         this.inscricao = inscricao;
     }
 
-    public MostraFeed(int pagina, Inscricao inscricaoOrigem) {
+    public MostraFeed(int pagina, Inscricao inscricaoOrigem, int limit) {
         this.pagina = pagina;
-        int elemento = pagina * 3;
-        int primeiroElemento = pagina * 3;
+        this.limit = limit;
+        int elemento = pagina * limit;
+        int primeiroElemento = pagina * limit;
 
         this.inscricao = inscricaoOrigem;
         try {
@@ -180,7 +186,7 @@ public class MostraFeed extends javax.swing.JFrame {
 
                     private void botaoPaginaAnteriorActionPerformed(ActionEvent evt) {
                         MostraFeed.this.dispose();
-                        new MostraFeed(pagina - 1, inscricao).setVisible(true);
+                        new MostraFeed(pagina - 1, inscricao, MostraFeed.this.getLimit()).setVisible(true);
                     }
                 });
                 this.add(botaoPaginaAnterior);
@@ -189,7 +195,7 @@ public class MostraFeed extends javax.swing.JFrame {
             }
 
             try {
-                inscricaoOrigem.getArtigos().get(primeiroElemento + 3);
+                inscricaoOrigem.getArtigos().get(primeiroElemento + limit);
                 botaoProximaPagina = new JButton();
                 botaoProximaPagina.setBounds(301, 670, 200, 50);
 
@@ -201,7 +207,7 @@ public class MostraFeed extends javax.swing.JFrame {
 
                     private void botaoProximaPaginaActionPerformed(ActionEvent evt) {
                         MostraFeed.this.dispose();
-                        new MostraFeed(pagina + 1, inscricao).setVisible(true);
+                        new MostraFeed(pagina + 1, inscricao, MostraFeed.this.getLimit()).setVisible(true);
                     }
                 });
                 this.add(botaoProximaPagina);

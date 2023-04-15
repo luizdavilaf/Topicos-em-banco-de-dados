@@ -5,7 +5,18 @@
 package negocio;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
+
+import org.xml.sax.InputSource;
+
+import com.rometools.rome.feed.synd.SyndContent;
+import com.rometools.rome.feed.synd.SyndEntry;
+import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.io.FeedException;
+import com.rometools.rome.io.SyndFeedInput;
 
 /**
  *
@@ -18,8 +29,7 @@ public class Inscricao {
     private String url;    
     private String categoria;
     private ArrayList<Artigo> artigos;
-    private int total_pages;
-    private int total_articles;
+
 
     public Inscricao() {
         this.id = UUID.randomUUID();
@@ -58,8 +68,6 @@ public class Inscricao {
         this.categoria = categoria;
     }
 
-
-
     public ArrayList<Artigo> getArtigos() {
         return artigos;
     }
@@ -68,25 +76,37 @@ public class Inscricao {
         this.artigos = artigos;
     }
 
-    public int getTotal_pages() {
-        return total_pages;
-    }
 
-    public void setTotal_pages(int total_pages) {
-        this.total_pages = total_pages;
-    }
-
-    public int getTotal_articles() {
-        return total_articles;
-    }
-
-    public void setTotal_articles(int total_articles) {
-        this.total_articles = total_articles;
-    }
 
     @Override
     public String toString() {
-        return "[" + "nome=" + nome + ", categoria=" + categoria + ", Artigos=" + total_articles + ']';
+        return "[" + "nome:" + nome + ", categoria:" + categoria + ", URL:" + url + ']';
+    }
+
+
+    public Inscricao lerArtigosPaginados(Inscricao inscricao) throws FeedException {
+        SyndFeedInput input = new SyndFeedInput();
+        SyndFeed feed = input.build(new InputSource(inscricao.getUrl()));
+        Iterator itr = feed.getEntries().iterator();
+        while (itr.hasNext()) {
+            Artigo artigo = new Artigo();
+            SyndEntry syndEntry = (SyndEntry) itr.next();
+            artigo.setAutor(syndEntry.getAuthor());
+            artigo.setLink(syndEntry.getLink());
+            List<SyndContent> conteudos = syndEntry.getContents();
+            String result = "";
+            for (SyndContent conteudo : conteudos) {
+                result = result + conteudo.getValue();
+            }
+            String conteudoFinal = result.replaceAll("\\n", "");
+            conteudoFinal = conteudoFinal.replaceAll("<[^>]*>", "");
+            artigo.setConteudo(conteudoFinal);
+            artigo.setTitulo(syndEntry.getTitle());
+            artigo.setData(syndEntry.getPublishedDate());
+            inscricao.getArtigos().add(artigo);
+        }
+        inscricao.getArtigos().sort(Comparator.comparing(Artigo::getData).reversed());
+        return inscricao;
     }
     
     
