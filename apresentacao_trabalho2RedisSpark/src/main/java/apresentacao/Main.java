@@ -40,7 +40,7 @@ public class Main {
 
         post("/save-feed", (req, res) -> saveFeed(req, res) );
 
-        post("/delete-feed/:id", (req, res) -> deleteFeed(req, res));
+        get("/delete-feed/:id", (req, res) -> deleteFeed(req, res));
 
     }
 
