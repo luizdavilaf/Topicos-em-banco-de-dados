@@ -74,7 +74,7 @@ public class Artigo {
 
     @Override
     public String toString() {
-        return "<html>titulo=" + titulo + "<br> autor=" + autor + ",data=" + data.toString()+"</html>";
+        return "<html>titulo:" + titulo + "<br> autor:" + autor + ",data:" + data.toString()+"</html>";
     }
 
     
