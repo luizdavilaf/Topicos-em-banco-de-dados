@@ -31,29 +31,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <th>Editar</th>
                     <th>Excluir</th>
                     <th>Ler Artigos</th>
-
                 </tr>
-
-
                 {{#feeds}}
-
-
-
                 <tr>                  
                     <td>{{nome}}</td>
                     <td>{{url}}</td>  
                     <td>{{categoria}}</td>                 
-                    <td><a href='' class='btn btn-success'>Editar</a></td>                  
-                    <td><a href='' class='btn btn-danger'>Excluir</a></td>
-                    <td><a href='' class='btn btn-danger'>Ler Artigos</a></td>
+                    <td> <button onclick="location.href='/feed/{{id}}'" type="button" class="btn btn-danger">Editar</button></td>
+                    <td><button onclick="location.href='/delete-feed/{{id}}'" type="button" class="btn btn-danger">Excluir</button></td>                      
+                    <td><button onclick="location.href='/show-articles/{{id}}?page=1'" type="button" class="btn btn-danger">Ler Artigos</button></td>
                 </tr>                 
-                {{/feeds}}              
-
+                {{/feeds}}             
             </table >            
-
-
-
-
         </div>
     </body>
 </html>

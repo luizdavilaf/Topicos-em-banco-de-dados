@@ -11,6 +11,8 @@ import persistencia.InscricaoDAO;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
 import spark.ModelAndView;
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -38,6 +40,8 @@ public class Main {
 
         post("/save-feed", (req, res) -> saveFeed(req, res) );
 
+        post("/delete-feed/:id", (req, res) -> deleteFeed(req, res));
+
     }
 
     private static ModelAndView showAll(Request req, Response res) {
@@ -61,6 +65,21 @@ public class Main {
         inscricao.setCategoria(req.queryParams("categoria"));
         try {
             inscricaoDAO.adicionar(inscricao);
+        } catch (Exception e) {
+            System.out.println(e);
+            return "Internal server error!";
+        }
+        res.redirect("/");
+        return "ok";
+
+    }
+
+    private static String deleteFeed(Request req, Response res) {       
+        InscricaoDAO inscricaoDAO = new InscricaoDAO();
+        UUID idUUID = UUID.fromString(req.params("id"));     
+        try {
+            Inscricao inscricao = inscricaoDAO.obter(idUUID);
+            inscricaoDAO.remover(inscricao);            
         } catch (Exception e) {
             System.out.println(e);
             return "Internal server error!";
