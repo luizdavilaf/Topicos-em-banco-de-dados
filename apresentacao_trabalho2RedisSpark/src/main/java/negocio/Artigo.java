@@ -4,7 +4,7 @@
  */
 package negocio;
 
-import java.time.LocalDateTime;
+
 import java.util.Date;
 
 /**
@@ -16,7 +16,6 @@ public class Artigo {
     private String titulo;
     private String link;
     private String autor;
-    private String imgUrl;
     private String conteudo;
     private Date data;
    
@@ -30,14 +29,6 @@ public class Artigo {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
     }
 
     public String getTitulo() {

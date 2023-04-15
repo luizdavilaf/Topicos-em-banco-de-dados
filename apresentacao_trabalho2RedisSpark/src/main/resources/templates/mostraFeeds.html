@@ -39,7 +39,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <td>{{categoria}}</td>                 
                     <td> <button onclick="location.href='/feed/{{id}}'" type="button" class="btn btn-danger">Editar</button></td>
                     <td><button onclick="location.href='/delete-feed/{{id}}'" type="button" class="btn btn-danger">Excluir</button></td>                      
-                    <td><button onclick="location.href='/show-articles/{{id}}?page=1'" type="button" class="btn btn-danger">Ler Artigos</button></td>
+                    <td><button onclick="location.href='/show-articles/{{id}}?page=0&limit=5'" type="button" class="btn btn-danger">Ler Artigos</button></td>
                 </tr>                 
                 {{/feeds}}             
             </table >            

@@ -42,6 +42,13 @@ public class Main {
 
         get("/delete-feed/:id", (req, res) -> deleteFeed(req, res));
 
+        get("/feed/:id", (req, res) -> getToEditFeed(req, res), new MustacheTemplateEngine());
+
+        post("/edit-feed", (req, res) -> editFeed(req, res));
+
+        get("/show-articles/:id", (req, res) -> showArticlesPaginated(req, res), new MustacheTemplateEngine());
+
+
     }
 
     private static ModelAndView showAll(Request req, Response res) {
@@ -89,4 +96,70 @@ public class Main {
 
     }
 
+    private static String editFeed(Request req, Response res) {
+        InscricaoDAO inscricaoDAO = new InscricaoDAO();
+        UUID idUUID = UUID.fromString(req.queryParams("id"));
+        try {
+            Inscricao inscricao = inscricaoDAO.obter(idUUID);
+            inscricao.setNome(req.queryParams("nome"));
+            inscricao.setUrl(req.queryParams("url"));
+            inscricao.setCategoria(req.queryParams("categoria"));
+            inscricaoDAO.atualizar(inscricao);
+        } catch (Exception e) {
+            System.out.println(e);
+            return "Internal server error!";
+        }
+        res.redirect("/");
+        return "ok";
+
+    }
+
+
+    private static ModelAndView getToEditFeed(Request req, Response res) {
+        HashMap<String, Object> model = new HashMap<>();
+        InscricaoDAO inscricaoDAO = new InscricaoDAO();
+        UUID idUUID = UUID.fromString(req.params("id"));
+        try {
+            Inscricao inscricao = inscricaoDAO.obter(idUUID);           
+            model.put("feeds", inscricao);
+        } catch (Exception ex) {
+            System.out.println(ex);
+            res.redirect("/");
+        }
+        return new ModelAndView(model, "editarInscricao.html");
+    }
+
+
+    private static ModelAndView showArticlesPaginated(Request req, Response res) {
+        HashMap<String, Object> model = new HashMap<>();
+        InscricaoDAO inscricaoDAO = new InscricaoDAO();
+        UUID idUUID = UUID.fromString(req.params("id"));
+        try {
+            Inscricao inscricao = inscricaoDAO.obter(idUUID);
+            int pagina = Integer.parseInt(req.queryParams("page"));
+            int limite = Integer.parseInt(req.queryParams("limit"));
+            int elemento = pagina * limite;
+            int total = inscricao.getArtigos().size();
+            inscricao = inscricao.lerArtigosPaginados(inscricao);
+            if(pagina>0){
+                model.put("previous", pagina-1 );
+            }
+            if (pagina < total -1) {
+                model.put("next", pagina + 1);
+            }
+            for(int i = elemento; i < limite; i++){
+                if(i < total){
+                   try {
+                       model.put("articles", inscricao.getArtigos().get(i));
+                   } catch (Exception e) {
+                    // sem artigo na posicao
+                   }
+                }
+            }            
+        } catch (Exception ex) {
+            System.out.println(ex);
+            res.redirect("/");
+        }
+        return new ModelAndView(model, "mostraArtigos.html");
+    }
 }
