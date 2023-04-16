@@ -5,6 +5,7 @@
 package apresentacao;
 
 import com.rometools.rome.io.FeedException;
+import java.util.ArrayList;
 
 import negocio.Inscricao;
 import persistencia.InscricaoDAO;
@@ -12,6 +13,7 @@ import persistencia.InscricaoDAO;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import negocio.Artigo;
 
 import spark.ModelAndView;
 import static spark.Spark.get;
@@ -29,8 +31,6 @@ public class Main {
     public static void main(String[] args) throws IllegalArgumentException, FeedException {
         Map map = new HashMap();
         map.put("name", "Sam");
-        
-
 
         get("/", (req, res) -> new ModelAndView(map, "index.html"), new MustacheTemplateEngine());
 
@@ -38,7 +38,7 @@ public class Main {
 
         get("/show-feeds", (req, res) -> showAll(req, res), new MustacheTemplateEngine());
 
-        post("/save-feed", (req, res) -> saveFeed(req, res) );
+        post("/save-feed", (req, res) -> saveFeed(req, res));
 
         get("/delete-feed/:id", (req, res) -> deleteFeed(req, res));
 
@@ -48,12 +48,11 @@ public class Main {
 
         get("/show-articles/:id", (req, res) -> showArticlesPaginated(req, res), new MustacheTemplateEngine());
 
-
     }
 
     private static ModelAndView showAll(Request req, Response res) {
         HashMap<String, Object> model = new HashMap<>();
-        InscricaoDAO inscricaoDAO = new InscricaoDAO();     
+        InscricaoDAO inscricaoDAO = new InscricaoDAO();
         try {
             model.put("feeds", inscricaoDAO.listar());
         } catch (Exception ex) {
@@ -81,12 +80,12 @@ public class Main {
 
     }
 
-    private static String deleteFeed(Request req, Response res) {       
+    private static String deleteFeed(Request req, Response res) {
         InscricaoDAO inscricaoDAO = new InscricaoDAO();
-        UUID idUUID = UUID.fromString(req.params("id"));     
+        UUID idUUID = UUID.fromString(req.params("id"));
         try {
             Inscricao inscricao = inscricaoDAO.obter(idUUID);
-            inscricaoDAO.remover(inscricao);            
+            inscricaoDAO.remover(inscricao);
         } catch (Exception e) {
             System.out.println(e);
             return "Internal server error!";
@@ -114,13 +113,12 @@ public class Main {
 
     }
 
-
     private static ModelAndView getToEditFeed(Request req, Response res) {
         HashMap<String, Object> model = new HashMap<>();
         InscricaoDAO inscricaoDAO = new InscricaoDAO();
         UUID idUUID = UUID.fromString(req.params("id"));
         try {
-            Inscricao inscricao = inscricaoDAO.obter(idUUID);           
+            Inscricao inscricao = inscricaoDAO.obter(idUUID);
             model.put("feeds", inscricao);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -129,37 +127,61 @@ public class Main {
         return new ModelAndView(model, "editarInscricao.html");
     }
 
-
     private static ModelAndView showArticlesPaginated(Request req, Response res) {
         HashMap<String, Object> model = new HashMap<>();
-        InscricaoDAO inscricaoDAO = new InscricaoDAO();
-        UUID idUUID = UUID.fromString(req.params("id"));
+        ArrayList<Artigo> artigos = new ArrayList<>();;
         try {
+
+            InscricaoDAO inscricaoDAO = new InscricaoDAO();
+            UUID idUUID = UUID.fromString(req.params("id"));
             Inscricao inscricao = inscricaoDAO.obter(idUUID);
+
             int pagina = Integer.parseInt(req.queryParams("page"));
             int limite = Integer.parseInt(req.queryParams("limit"));
             int elemento = pagina * limite;
-            int total = inscricao.getArtigos().size();
-            inscricao = inscricao.lerArtigosPaginados(inscricao);
-            if(pagina>0){
-                model.put("previous", pagina-1 );
-            }
-            if (pagina < total -1) {
-                model.put("next", pagina + 1);
-            }
-            for(int i = elemento; i < limite; i++){
-                if(i < total){
-                   try {
-                       model.put("articles", inscricao.getArtigos().get(i));
-                   } catch (Exception e) {
-                    // sem artigo na posicao
-                   }
+            int ultimoElemento = elemento + limite;
+            model.put("id", req.params("id"));
+            
+            System.out.println(pagina);
+            System.out.println(limite);
+            
+
+            try {
+                inscricao = inscricao.lerArtigosPaginados(inscricao);
+                int total = inscricao.getArtigos().size();
+                
+
+                if (pagina > 0) {
+                    model.put("previous", pagina - 1);
+                } else {
+                    model.put("previous", 0);
                 }
-            }            
+                if (pagina < total - 1) {
+                    model.put("next", pagina + 1);
+                } else {
+                    model.put("next", pagina);
+                }
+               
+                for (int i = elemento; i < ultimoElemento; i++) {                    
+                    if (i < total) {
+                        try {
+                            //System.out.println(inscricao.getArtigos().get(i).toString());
+                            artigos.add(inscricao.getArtigos().get(i));
+                        } catch (Exception e) {
+                            System.out.println("sem artigo");
+                        }
+                    }
+                }
+            } finally {
+                model.put("articles", artigos);
+            }
         } catch (Exception ex) {
             System.out.println(ex);
             res.redirect("/");
+        } finally {
+            
+            return new ModelAndView(model, "mostraArtigos.html");
         }
-        return new ModelAndView(model, "mostraArtigos.html");
+
     }
 }

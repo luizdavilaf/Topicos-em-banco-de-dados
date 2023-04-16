@@ -87,6 +87,7 @@ public class Inscricao {
     public Inscricao lerArtigosPaginados(Inscricao inscricao) throws FeedException {
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = input.build(new InputSource(inscricao.getUrl()));
+        inscricao.getArtigos().removeAll(artigos);
         Iterator itr = feed.getEntries().iterator();
         while (itr.hasNext()) {
             Artigo artigo = new Artigo();

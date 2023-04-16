@@ -88,6 +88,7 @@ public class Inscricao {
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = input.build(new InputSource(inscricao.getUrl()));
         Iterator itr = feed.getEntries().iterator();
+         inscricao.getArtigos().removeAll(artigos);
         while (itr.hasNext()) {
             Artigo artigo = new Artigo();
             SyndEntry syndEntry = (SyndEntry) itr.next();
