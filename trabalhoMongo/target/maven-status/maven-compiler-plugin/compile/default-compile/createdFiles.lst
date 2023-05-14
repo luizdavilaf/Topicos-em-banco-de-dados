@@ -1,0 +1,6 @@
+negocio\Contato.class
+apresentacao\Main.class
+negocio\Endereco.class
+negocio\Telefone.class
+persistencia\ConexaoMongo.class
+persistencia\ContatoDAO.class
