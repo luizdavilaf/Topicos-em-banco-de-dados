@@ -14,7 +14,7 @@ import org.bson.types.ObjectId;
 public class Contato {
       private ObjectId id;
     private String name;
-    private ArrayList<Telefone> telefones;
+    private ArrayList<String> telefones;
     private Endereco endereco;
 
     public Contato() {
@@ -37,11 +37,11 @@ public class Contato {
         this.name = name;
     }
 
-    public ArrayList<Telefone> getTelefones() {
+    public ArrayList<String> getTelefones() {
         return telefones;
     }
 
-    public void setTelefones(ArrayList<Telefone> telefones) {
+    public void setTelefones(ArrayList<String> telefones) {
         this.telefones = telefones;
     }
 
@@ -51,6 +51,11 @@ public class Contato {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Contato{" + "id=" + id + ", name=" + name + ", telefones=" + telefones + ", endereco=" + endereco + '}';
     }
 
 
