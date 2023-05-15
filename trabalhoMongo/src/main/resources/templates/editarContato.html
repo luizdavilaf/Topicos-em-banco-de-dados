@@ -12,13 +12,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
     <script>
       function submitform(){
-        var form = document.getElementById("myForm");
+               var form = document.getElementById("myForm");
           form.onsubmit = function(event){
             let data = {
             name : form.querySelector('input[name="nome"]').value,
+            id: {"$oid":form.querySelector('input[name="id"]').value},
             endereco: {
               rua: form.querySelector('input[name="rua"]').value,
               numero: form.querySelector('input[name="numero"]').value,
@@ -49,66 +50,89 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
           return false
           }
       }
+   function initialize(){
+    var telefonesArray = document.getElementyById('telefones1');
+    document.getElementById("telefone1").value = telefonesArray[0] || undefined
+    document.getElementById("telefone2").value = telefonesArray[1] || undefined
+    document.getElementById("telefone3").value = telefonesArray[2] || undefined
+    document.getElementById("telefone4").value = telefonesArray[3] || undefined
+    document.getElementById("telefone5").value = telefonesArray[4] || undefined
+   }
+    
     </script>
   </head>
-  <body>
-    <div class="container">
-       <header>
+  <body onload="initialize()">
+           <header>
           <div class="jumbotron">
               <h1>Agenda de TBD</h1>
               
           </div>
       </header>
-      <h1>Novo Contato</h1>
-
-        <form method="post" action="/save-contact/" id= "myForm" name="myForm">
-
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" placeholder="nome do contato" required/>
+    <div class="container">
+      <h1>Editar Contato</h1>
+      {{#contatos}}                             
+                
+      <form method="post" action="/edit-contact/{{id}}" id= "myForm" name="myForm">
+          <input type="hidden" name="id" value="{{id}}">
+          <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{name}}" required/>
             </br>
 
 
             <h5>Endereço:</h5>
             <label for="rua">Rua:</label>
-            <input type="text" id="rua" name="rua" placeholder="nome da rua" required/>
+            <input type="text" id="rua" name="rua" value="{{endereco.rua}}" required/>
             </br>
 
             <label for="numero">Número:</label>
-            <input type="number" id="numero" name="numero" placeholder="numero" required/>
+            <input type="number" id="numero" name="numero" value="{{endereco.numero}}" required/>
             </br>
 
             <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" name="bairro" placeholder="bairro" required/>
+            <input type="text" id="bairro" name="bairro" value="{{endereco.bairro}}" required/>
             </br>
 
             <label for="complemento">Complemento:</label>
-            <input type="text" id="complemento" name="complemento" placeholder="complemento" />
+            <input type="text" id="complemento" name="complemento" value="{{endereco.complemento}}" />
             </br>
 
             <label for="cidade">Cidade:</label>
-            <input type="text" id="cidade" name="cidade" placeholder="nome da cidade" required/>
+            <input type="text" id="cidade" name="cidade" value="{{endereco.cidade}}" required/>
             </br>
 
             <h5>Telefones:</h5>
+            
             <label for="telefones">telefone 1:</label>
-            <input type="text" name="telefones[0]"/>
+            <span hidden id="telefones1">{{telefones}}</span>
+            <input type="text" name="telefones[0]" id="telefone1"/>
             </br>
             <label for="telefones">telefone 2:</label>
-            <input type="text" name="telefones[1]"/>
+            <input type="text" name="telefones[1]" id="telefone2"/>
             </br>
             <label for="telefones">telefone 3:</label>
-            <input type="text" name="telefones[2]"/>
+            <input type="text" name="telefones[2]" id="telefone3"/>
             </br>
             <label for="telefones">telefone 4:</label>
-            <input type="text" name="telefones[3]"/>
+            <input type="text" name="telefones[3]" id="telefone4"/>
             </br>
             <label for="telefones">telefone 5:</label>
-            <input type="text" name="telefones[4]"/>
+            <input type="text" name="telefones[4]" id="telefone5"/>
             </br>
-
+             
+            
             <input type="submit" value="Salvar" class="submit" onclick="submitform()"/>
 
-        </form>
+
+
+
+
+
+
+
+       
+
+      </form>
+      {{/contatos}}   
     </div>
   </body>
 </html>

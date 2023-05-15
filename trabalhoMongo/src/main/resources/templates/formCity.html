@@ -12,30 +12,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
   </head>
   <body>
     <div class="container">
-      <h1>Editar Inscrição</h1>
-      {{#feeds}}                             
-                
-      <form method="post" action="/edit-feed">
+       <header>
+          <div class="jumbotron">
+              <h1>Agenda de TBD</h1>
+              
+          </div>
+      </header>
+      <h1>Busca por cidade</h1>
 
-          <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" placeholder="{{nome}}" />
-          </br>
+        <form method="get" action="/show-contacts-by-city/" id= "myForm" name="myForm">
+            <label for="cidade">cidade:</label>
+            <input type="text" id="cidade" name="cidade" required/>
+            </br>
 
-          <label for="url">Url:</label>
-          <input type="text" id="url" name="url" placeholder="{{url}}" />
-          </br>
+            <input type="submit" value="Buscar" class="submit" />
 
-          <label for="categoria">Categoria</label>
-          <input type="text" id="categoria" name="categoria" placeholder="{{categoria}}" />
-          </br>
-          <input type="hidden" name="id" value="{{id}}">
-          <input type="submit" value="Salvar" class="submit"/>
-
-      </form>
-      {{/feeds}}   
+        </form>
     </div>
   </body>
 </html>

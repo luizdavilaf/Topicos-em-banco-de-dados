@@ -12,7 +12,7 @@ import org.bson.types.ObjectId;
  * @author luizd
  */
 public class Contato {
-      private ObjectId id;
+    private ObjectId id;
     private String name;
     private ArrayList<String> telefones;
     private Endereco endereco;

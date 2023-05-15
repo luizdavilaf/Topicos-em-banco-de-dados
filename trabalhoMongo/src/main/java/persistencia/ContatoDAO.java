@@ -76,6 +76,7 @@ public class ContatoDAO extends ConexaoMongo {
             Bson updates = combine(updateNome, updateEndereco, updateTelefones);
             contatoCollection.updateOne(eq("_id", contato.getId()), updates);
         } catch (Exception e) {
+            System.err.println(e);
             throw new Exception("Erro ao atualizar contato");
         } finally {
             System.out.println("atualizado");
@@ -117,6 +118,31 @@ public class ContatoDAO extends ConexaoMongo {
             throw new Exception("Erro ao buscas contatos");
         } finally {
             return contatos;
+        }
+    }
+
+    public void deleteById(ObjectId _id) throws Exception {
+        try {
+            db = getDatabase();
+            MongoCollection<Contato> contatoCollection = db.getCollection("Contato", Contato.class);
+            contatoCollection.findOneAndDelete(eq("_id", _id));
+        } catch (Exception e) {
+            throw new Exception("Erro ao deletar contato");
+        } finally {
+            System.out.println("deletado");
+        }
+    }
+
+    public Contato findById(ObjectId _id) {
+        Contato contato = null;
+        try {
+            db = getDatabase();
+            MongoCollection<Contato> contatoCollection = db.getCollection("Contato", Contato.class);
+            contato = contatoCollection.find(eq("_id", _id)).first();
+        } catch (Exception e) {
+            throw new Exception("Erro ao buscar contato com o nome " + _id);
+        } finally {
+            return contato;
         }
     }
     
