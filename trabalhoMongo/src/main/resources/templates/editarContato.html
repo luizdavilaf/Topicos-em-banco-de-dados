@@ -51,12 +51,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
           }
       }
    function initialize(){
-    var telefonesArray = document.getElementyById('telefones1');
-    document.getElementById("telefone1").value = telefonesArray[0] || undefined
-    document.getElementById("telefone2").value = telefonesArray[1] || undefined
-    document.getElementById("telefone3").value = telefonesArray[2] || undefined
-    document.getElementById("telefone4").value = telefonesArray[3] || undefined
-    document.getElementById("telefone5").value = telefonesArray[4] || undefined
+    var telefonesArray = document.getElementyById('telefones1').textContent;
+    telefonesArray = telefonesArray.replace("[", "")
+    telefonesArray = telefonesArray.replace("]", "")
+    telefonesArray = telefonesArray.split(",")
+    document.getElementById("telefone1").value = telefonesArray[0] || ""
+    document.getElementById("telefone2").value = telefonesArray[1] || ""
+    document.getElementById("telefone3").value = telefonesArray[2] || ""
+    document.getElementById("telefone4").value = telefonesArray[3] || ""
+    document.getElementById("telefone5").value = telefonesArray[4] || ""
    }
     
     </script>
