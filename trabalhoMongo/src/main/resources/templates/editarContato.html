@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+  <head>
+    <title>index</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+    <script>
+      function submitform(){
+               var form = document.getElementById("myForm");
+          form.onsubmit = function(event){
+            let data = {
+            name : form.querySelector('input[name="nome"]').value,
+            id: {"$oid":form.querySelector('input[name="id"]').value},
+            endereco: {
+              rua: form.querySelector('input[name="rua"]').value,
+              numero: form.querySelector('input[name="numero"]').value,
+              bairro: form.querySelector('input[name="bairro"]').value,
+              complemento: form.querySelector('input[name="complemento"]').value,
+              cidade: form.querySelector('input[name="cidade"]').value,
+            },
+            telefones: [
+              form.querySelector('input[name="telefones[0]"]').value || undefined,
+              form.querySelector('input[name="telefones[1]"]').value || undefined,
+              form.querySelector('input[name="telefones[2]"]').value || undefined,
+              form.querySelector('input[name="telefones[3]"]').value || undefined,
+              form.querySelector('input[name="telefones[4]"]').value || undefined,
+            ],
+          }     
+          data.telefones = data.telefones.filter((element)=> {return (element!=null && element!==undefined && element!=="")})
+          var xhr = new XMLHttpRequest();
+          xhr.open(form.method, form.action, true);
+          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');        
+          xhr.send(JSON.stringify(data));
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState == XMLHttpRequest.DONE) {
+                  window.alert(xhr.response)
+                  window.location.href = "http://localhost:4567/"
+              }
+          }
+          
+          return false
+          }
+      }
+   function initialize(){
+    var telefonesArray = document.getElementById('telefones1').textContent;
+    telefonesArray = telefonesArray.replace("[", "")
+    telefonesArray = telefonesArray.replace("]", "")
+    telefonesArray = telefonesArray.split(",")
+    document.getElementById("telefone1").value = telefonesArray[0] || ""
+    document.getElementById("telefone2").value = telefonesArray[1] || ""
+    document.getElementById("telefone3").value = telefonesArray[2] || ""
+    document.getElementById("telefone4").value = telefonesArray[3] || ""
+    document.getElementById("telefone5").value = telefonesArray[4] || ""
+   }
+    
+    </script>
+  </head>
+  <body onload="initialize()">
+           <header>
+          <div class="jumbotron">
+              <h1>Agenda de TBD</h1>
+              
+          </div>
+      </header>
+    <div class="container">
+      <h1>Editar Contato</h1>
+      {{#contatos}}                             
+                
+      <form method="post" action="/edit-contact/{{id}}" id= "myForm" name="myForm">
+          <input type="hidden" name="id" value="{{id}}">
+          <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{name}}" required/>
+            </br>
+
+
+            <h5>Endereço:</h5>
+            <label for="rua">Rua:</label>
+            <input type="text" id="rua" name="rua" value="{{endereco.rua}}" required/>
+            </br>
+
+            <label for="numero">Número:</label>
+            <input type="number" id="numero" name="numero" value="{{endereco.numero}}" required/>
+            </br>
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" value="{{endereco.bairro}}" required/>
+            </br>
+
+            <label for="complemento">Complemento:</label>
+            <input type="text" id="complemento" name="complemento" value="{{endereco.complemento}}" />
+            </br>
+
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" name="cidade" value="{{endereco.cidade}}" required/>
+            </br>
+
+            <h5>Telefones:</h5>
+            
+            <label for="telefones">telefone 1:</label>
+            <span hidden id="telefones1">{{telefones}}</span>
+            <input type="text" name="telefones[0]" id="telefone1"/>
+            </br>
+            <label for="telefones">telefone 2:</label>
+            <input type="text" name="telefones[1]" id="telefone2"/>
+            </br>
+            <label for="telefones">telefone 3:</label>
+            <input type="text" name="telefones[2]" id="telefone3"/>
+            </br>
+            <label for="telefones">telefone 4:</label>
+            <input type="text" name="telefones[3]" id="telefone4"/>
+            </br>
+            <label for="telefones">telefone 5:</label>
+            <input type="text" name="telefones[4]" id="telefone5"/>
+            </br>
+             
+            
+            <input type="submit" value="Salvar" class="submit" onclick="submitform()"/>
+
+
+
+
+
+
+
+
+       
+
+      </form>
+      {{/contatos}}   
+    </div>
+  </body>
+</html>
