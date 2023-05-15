@@ -55,11 +55,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     telefonesArray = telefonesArray.replace("[", "")
     telefonesArray = telefonesArray.replace("]", "")
     telefonesArray = telefonesArray.split(",")
-    document.getElementById("telefone1").value = telefonesArray[0] || ""
-    document.getElementById("telefone2").value = telefonesArray[1] || ""
-    document.getElementById("telefone3").value = telefonesArray[2] || ""
-    document.getElementById("telefone4").value = telefonesArray[3] || ""
-    document.getElementById("telefone5").value = telefonesArray[4] || ""
+    document.getElementById("telefone1").value = telefonesArray[0].trim() || ""
+    document.getElementById("telefone2").value = telefonesArray[1].trim() || ""
+    document.getElementById("telefone3").value = telefonesArray[2].trim() || ""
+    document.getElementById("telefone4").value = telefonesArray[3].trim() || ""
+    document.getElementById("telefone5").value = telefonesArray[4].trim() || ""
    }
     
     </script>
