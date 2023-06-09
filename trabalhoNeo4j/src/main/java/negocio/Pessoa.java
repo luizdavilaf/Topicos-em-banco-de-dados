@@ -6,17 +6,23 @@ package negocio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import com.google.gson.annotations.Expose;
 
 /**
  *
  * @author luizd
  */
 public class Pessoa {
+    @Expose
     private int id;
+    @Expose
     private String cpf;
+    @Expose
     private String nome;
-    private String email;
+    @Expose
+    private String email;    
     private String senha;
+    @Expose
     private LocalDate dataDeNascimento;
 
     public Pessoa() {
