@@ -162,23 +162,36 @@ public class PessoaDAO {
                     + "WHERE id(p1) = $id AND (p2)-[:ADICIONOU]->(p1) "
                     + "RETURN p2", parameters("id", id));
             Result result = session.run(query);
-            if (result.hasNext()) {
+            while (result.hasNext()) {
                 Pessoa pessoa = new Pessoa();
-                Value v = result.next().get(0);
-                Node node = v.asNode();
+                org.neo4j.driver.Record record = result.next();
+                
+                Value p2Value = record.get("p2");   
+                Node node = p2Value.asNode();
                 long nodeId = node.id();
-                pessoa.setId((int) nodeId);                
-                pessoa.setCpf(v.get("cpf").asString());
-                pessoa.setNome(v.get("nome").asString());
-                pessoa.setEmail(v.get("email").asString());
-                pessoa.setDataDeNascimento(v.get("dataDeNascimento").asLocalDate());
+                pessoa.setId((int) nodeId);   
+                Value cpfValue = node.get("cpf");     
+                pessoa.setCpf(cpfValue.asString());
+                
+                Value nomeValue = node.get("nome");  
+                pessoa.setNome(nomeValue.asString());
+                
+                Value emailValue = node.get("email");  
+                pessoa.setEmail(emailValue.asString());
+                
+                Value dataDeNascimentoValue = node.get("dataDeNascimento");  
+                pessoa.setDataDeNascimento(dataDeNascimentoValue.asLocalDate());
+                
                 pessoas.add(pessoa);
             }
         } catch (Exception e) {
             System.out.println(e);
             throw new Error("Erro ao buscar amigos");
+        }finally{
+            //System.out.println(pessoas);
+            return pessoas;
         }
-        return pessoas;
+        
     }
 
 }
