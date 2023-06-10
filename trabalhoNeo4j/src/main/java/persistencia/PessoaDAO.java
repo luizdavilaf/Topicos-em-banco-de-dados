@@ -93,9 +93,13 @@ public class PessoaDAO {
 
     public boolean deleteById(int id) {
         try (Session session = this.conexaoNeo4J.getDriver().session()) {
-            Query query = new Query("MATCH (p:Pessoa) where ID(p) = $id delete p", parameters("id", id));
+            //remove somente se nao tiver relacionamentos
+            //Query query = new Query("MATCH (p:Pessoa) where ID(p) = $id delete p", parameters("id", id));
+            //remove a pessoa e seus relacionamentos
+            Query query = new Query("MATCH (p:Pessoa) WHERE ID(p) = $id DETACH DELETE p", parameters("id", id));
             session.run(query);
         } catch (Exception e) {
+            System.out.println(e);
             throw new Error("Erro ao remover pessoa");
         }
         return true;
@@ -118,7 +122,6 @@ public class PessoaDAO {
                     "MATCH (p1: Pessoa)-[a:ADICIONOU]->(p2:Pessoa) Where ID(p1) = $idOrigem and ID(p2) = $idDestino DELETE a",
                     parameters("idOrigem", idOrigem, "idDestino", idDestino));
             session.run(query);
-
         }
     }
 
@@ -140,19 +143,41 @@ public class PessoaDAO {
         }
     }
 
-    public boolean verPedidosDeAmizades(int idOrigem, int idDestino) {
-
+    public List<Pessoa> verPedidosDeAmizadePendentes(int id) {
+        List<Pessoa> pessoas = new ArrayList<>();
         try (Session session = this.conexaoNeo4J.getDriver().session()) {
-            Query query = new Query(
-                    "MATCH (p1:Pessoa), (p2:Pessoa) Where ID(p1) = $idOrigem and ID(p2) = $idDestino CREATE (p1)-[:ADICIONOU]->(p2)",
-                    parameters("idOrigem", idOrigem, "idDestino", idDestino));
+            Query query = new Query("MATCH (p1)<-[r:ADICIONOU]-(p2) "
+                    + "WHERE id(p1) = $id AND NOT exists((p1)-[:ADICIONOU]->(p2)) "
+                    + "RETURN p2", parameters("id", id));
+            Result result = session.run(query);
+            while (result.hasNext()) {
+                Pessoa pessoa = new Pessoa();
+                org.neo4j.driver.Record record = result.next();
 
-            session.run(query);
-            // session.run(query);
+                Value p2Value = record.get("p2");
+                Node node = p2Value.asNode();
+                long nodeId = node.id();
+                pessoa.setId((int) nodeId);
+                Value cpfValue = node.get("cpf");
+                pessoa.setCpf(cpfValue.asString());
 
+                Value nomeValue = node.get("nome");
+                pessoa.setNome(nomeValue.asString());
+
+                Value emailValue = node.get("email");
+                pessoa.setEmail(emailValue.asString());
+
+                Value dataDeNascimentoValue = node.get("dataDeNascimento");
+                pessoa.setDataDeNascimento(dataDeNascimentoValue.asLocalDate());
+
+                pessoas.add(pessoa);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new Error("Erro ao buscar pedidos de amizade pendentes");
+        } finally {
+            return pessoas;
         }
-        return this.verificarAmizade(idDestino, idOrigem);
-
     }
 
     public List<Pessoa> verListaDeAmigos(int id) {
@@ -165,33 +190,33 @@ public class PessoaDAO {
             while (result.hasNext()) {
                 Pessoa pessoa = new Pessoa();
                 org.neo4j.driver.Record record = result.next();
-                
-                Value p2Value = record.get("p2");   
+
+                Value p2Value = record.get("p2");
                 Node node = p2Value.asNode();
                 long nodeId = node.id();
-                pessoa.setId((int) nodeId);   
-                Value cpfValue = node.get("cpf");     
+                pessoa.setId((int) nodeId);
+                Value cpfValue = node.get("cpf");
                 pessoa.setCpf(cpfValue.asString());
-                
-                Value nomeValue = node.get("nome");  
+
+                Value nomeValue = node.get("nome");
                 pessoa.setNome(nomeValue.asString());
-                
-                Value emailValue = node.get("email");  
+
+                Value emailValue = node.get("email");
                 pessoa.setEmail(emailValue.asString());
-                
-                Value dataDeNascimentoValue = node.get("dataDeNascimento");  
+
+                Value dataDeNascimentoValue = node.get("dataDeNascimento");
                 pessoa.setDataDeNascimento(dataDeNascimentoValue.asLocalDate());
-                
+
                 pessoas.add(pessoa);
             }
         } catch (Exception e) {
             System.out.println(e);
             throw new Error("Erro ao buscar amigos");
-        }finally{
-            //System.out.println(pessoas);
+        } finally {
+            // System.out.println(pessoas);
             return pessoas;
         }
-        
+
     }
 
 }
